@@ -1,202 +1,164 @@
 /**
- * PricingView Component
- * Dark Mode Default & Full Window Height Layout
- * Transparent pricing tiers for Azarel digital assets:
- * - Community Free ($0)
- * - Pro Solo ($24/mo or $288/yr)
- * - Team All-Access ($69/mo or $828/yr)
- * - Feature comparison matrix & FAQs
+ * PricingView Component — Family Style Reference
+ * Section bundles and transparent lifetime licensing tiers.
  */
+
+import { BUNDLES } from '../data/products.js';
+import { state } from '../state.js';
 
 export function renderPricingView() {
   return `
-    <div class="pricing-page" style="min-height: calc(100vh - 68px);">
-      <!-- Pricing Hero (Windows Full Screen Ready) -->
-      <section style="background-color: var(--surface-canvas); border-bottom: 1px solid var(--color-cloud); text-align: center; padding: 60px 0;">
-        <div class="container" style="max-width: 820px;">
-          <span class="badge-ember" style="margin-bottom: 16px;">TRANSPARENT LICENSING</span>
-          <h1 class="text-display" style="margin-bottom: 16px;">
-            Invest once. Ship indefinitely.
-          </h1>
-          <p class="text-body-lg" style="margin-bottom: 32px;">
-            No recurring user seats or restrictive runtime royalties. Choose a plan or purchase individual assets perpetually.
-          </p>
-
-          <!-- Toggle: Annual vs Monthly -->
-          <div style="display: inline-flex; align-items: center; gap: 8px; background: var(--surface-card); padding: 6px 8px; border-radius: 10000px; border: 1px solid var(--color-cloud);">
-            <button 
-              id="billing-annual-btn" 
-              onclick="window.azarelSetBilling('annual')" 
-              class="btn-primary" 
-              style="padding: 8px 18px; font-size: 13px; border-radius: 10000px;"
-            >
-              Annual Billing (Save 25%)
-            </button>
-            <button 
-              id="billing-monthly-btn" 
-              onclick="window.azarelSetBilling('monthly')" 
-              class="btn-ghost" 
-              style="padding: 8px 18px; font-size: 13px; border-radius: 10000px; border: none;"
-            >
-              Monthly
-            </button>
+    <div class="pricing-page" style="padding: 48px 0 80px 0;">
+      <div class="container">
+        <!-- Header -->
+        <div style="text-align: center; max-width: 640px; margin: 0 auto 48px auto;">
+          <div style="display: inline-flex; align-items: center; gap: 6px; background: #f2f0ed; padding: 4px 14px; border-radius: 9999px; margin-bottom: 14px;">
+            <span style="font-size: 11px; font-weight: 700; color: #ff3e00; text-transform: uppercase;">PERPETUAL LICENSING</span>
           </div>
+          <h1 class="text-display" style="font-size: 48px; margin-bottom: 12px;">
+            Simple, fair pricing.
+          </h1>
+          <p class="text-body">
+            No monthly subscriptions or recurring fees. Buy individual sections or get lifetime access to the entire Family design catalog.
+          </p>
         </div>
-      </section>
 
-      <!-- Pricing Cards Grid -->
-      <section style="padding: 60px 0; border-bottom: 1px solid var(--color-cloud);">
-        <div class="container">
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; align-items: stretch;">
-            <!-- Plan 1: Community Free -->
-            <div class="card-awesomic" style="padding: 40px; display: flex; flex-direction: column; justify-content: space-between;">
-              <div>
-                <span class="tag-pill" style="margin-bottom: 12px;">Open Source</span>
-                <h3 style="font-size: 24px; font-weight: 700; color: var(--color-obsidian); margin-bottom: 8px;">Community</h3>
-                <p style="font-size: 14px; color: var(--color-steel); line-height: 1.5; margin-bottom: 24px;">
-                  Ideal for indie developers, students, and open-source hobby projects.
-                </p>
+        <!-- 3 Tier Cards Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1060px; margin: 0 auto 64px auto; align-items: stretch;">
+          <!-- Tier 1: Single Section -->
+          <div class="card-hairline" style="display: flex; flex-direction: column;">
+            <div style="font-size: 14px; font-weight: 600; color: #7e7e7d; text-transform: uppercase; margin-bottom: 6px;">
+              Starter
+            </div>
+            <h3 style="font-size: 22px; font-weight: 600; color: #121212; margin-bottom: 8px;">Single Section</h3>
+            <p style="font-size: 14px; color: #474645; margin-bottom: 20px;">
+              Pick and pay only for the exact section you need for your landing page.
+            </p>
+            <div style="font-size: 38px; font-weight: 700; color: #121212; margin-bottom: 24px;">
+              $19 - $39 <span style="font-size: 14px; font-weight: 400; color: #7e7e7d;">/ section</span>
+            </div>
 
-                <div style="margin-bottom: 28px;">
-                  <span style="font-size: 48px; font-weight: 700; color: var(--color-obsidian);">$0</span>
-                  <span style="font-size: 14px; color: var(--color-steel);"> / forever</span>
-                </div>
+            <ul style="list-style: none; padding: 0; margin: 0 0 28px 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: #474645;">
+              <li>✓ Full React 19 JSX component code</li>
+              <li>✓ Tailwind CSS v4 utility classes</li>
+              <li>✓ Mobile, tablet &amp; desktop tested</li>
+              <li>✓ Perpetual commercial license</li>
+              <li>✕ Access to other sections</li>
+            </ul>
 
-                <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 14px; color: var(--color-graphite); margin-bottom: 32px;">
-                  <li style="display: flex; gap: 10px;">✓ Access to all Free sections and icons</li>
-                  <li style="display: flex; gap: 10px;">✓ Community Discord access</li>
-                  <li style="display: flex; gap: 10px;">✓ MIT licensed starter code</li>
-                  <li style="display: flex; gap: 10px; color: var(--color-fog);">✕ No Figma tokens Studio variables</li>
-                  <li style="display: flex; gap: 10px; color: var(--color-fog);">✕ No private GitHub repository access</li>
-                </ul>
-              </div>
-
-              <a href="#/resources" class="btn-ghost" style="width: 100%; text-align: center; border-radius: 14px;">
-                Download Free Assets
+            <div style="margin-top: auto;">
+              <a href="#/sections" class="btn-sand-pill" style="display: block; text-align: center; width: 100%; padding: 12px;">
+                Browse Marketplace →
               </a>
             </div>
-
-            <!-- Plan 2: Pro Solo (Highlighted) -->
-            <div class="card-awesomic" style="padding: 40px; border-color: var(--color-mist); position: relative; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-md); background: #18181b;">
-              <span class="badge-ember" style="position: absolute; top: 16px; right: 20px;">
-                MOST POPULAR
-              </span>
-
-              <div>
-                <span class="tag-pill" style="margin-bottom: 12px;">Individual Pro</span>
-                <h3 style="font-size: 24px; font-weight: 700; color: var(--color-obsidian); margin-bottom: 8px;">Pro Designer</h3>
-                <p style="font-size: 14px; color: var(--color-steel); line-height: 1.5; margin-bottom: 24px;">
-                  Complete design system &amp; component library for solo builders and freelancers.
-                </p>
-
-                <div style="margin-bottom: 28px;">
-                  <span id="price-pro" style="font-size: 48px; font-weight: 700; color: var(--color-obsidian);">$24</span>
-                  <span id="period-pro" style="font-size: 14px; color: var(--color-steel);"> / month (billed annually)</span>
-                </div>
-
-                <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 14px; color: var(--color-graphite); margin-bottom: 32px;">
-                  <li style="display: flex; gap: 10px;">✓ <strong>All 50+ sections &amp; UI components</strong></li>
-                  <li style="display: flex; gap: 10px;">✓ React 19 + Tailwind v4 Source Code</li>
-                  <li style="display: flex; gap: 10px;">✓ Figma Variables &amp; AutoLayout 5.0</li>
-                  <li style="display: flex; gap: 10px;">✓ Unlimited commercial client projects</li>
-                  <li style="display: flex; gap: 10px;">✓ Lifetime weekly updates</li>
-                </ul>
-              </div>
-
-              <button 
-                onclick="window.azarelPurchaseAsset('plan-pro', 'Pro Designer Plan', 24)" 
-                class="btn-primary" 
-                style="width: 100%; border-radius: 14px; padding: 13px;"
-              >
-                Get Started with Pro
-              </button>
-            </div>
-
-            <!-- Plan 3: Team All-Access -->
-            <div class="card-awesomic" style="padding: 40px; display: flex; flex-direction: column; justify-content: space-between;">
-              <div>
-                <span class="tag-pill" style="margin-bottom: 12px;">Enterprise</span>
-                <h3 style="font-size: 24px; font-weight: 700; color: var(--color-obsidian); margin-bottom: 8px;">Team All-Access</h3>
-                <p style="font-size: 14px; color: var(--color-steel); line-height: 1.5; margin-bottom: 24px;">
-                  Scale your product engineering org with shared licenses and dedicated support.
-                </p>
-
-                <div style="margin-bottom: 28px;">
-                  <span id="price-team" style="font-size: 48px; font-weight: 700; color: var(--color-obsidian);">$69</span>
-                  <span id="period-team" style="font-size: 14px; color: var(--color-steel);"> / month (up to 10 seats)</span>
-                </div>
-
-                <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 14px; color: var(--color-graphite); margin-bottom: 32px;">
-                  <li style="display: flex; gap: 10px;">✓ Everything in Pro Designer</li>
-                  <li style="display: flex; gap: 10px;">✓ Private GitHub repository access</li>
-                  <li style="display: flex; gap: 10px;">✓ Up to 10 team seats included</li>
-                  <li style="display: flex; gap: 10px;">✓ Custom token integration advisory</li>
-                  <li style="display: flex; gap: 10px;">✓ Priority SLA support (under 4 hrs)</li>
-                </ul>
-              </div>
-
-              <button 
-                onclick="window.azarelPurchaseAsset('plan-team', 'Team All-Access Plan', 69)" 
-                class="btn-ghost" 
-                style="width: 100%; border-radius: 14px; padding: 13px;"
-              >
-                Start Team Trial
-              </button>
-            </div>
           </div>
-        </div>
-      </section>
 
-      <!-- License Comparison Table -->
-      <section style="padding: 60px 0;">
-        <div class="container">
-          <div style="text-align: center; max-width: 600px; margin: 0 auto 40px auto;">
-            <h2 class="text-heading">Detailed Feature Comparison</h2>
-            <p class="text-body" style="color: var(--color-steel); margin-top: 8px;">
-              Everything included in each tier, verified against design.md guidelines.
+          <!-- Tier 2: Essential Pack -->
+          <div class="card-hairline" style="display: flex; flex-direction: column;">
+            <div style="font-size: 14px; font-weight: 600; color: #ff3e00; text-transform: uppercase; margin-bottom: 6px;">
+              Launch Pack
+            </div>
+            <h3 style="font-size: 22px; font-weight: 600; color: #121212; margin-bottom: 8px;">Essential 5-Pack</h3>
+            <p style="font-size: 14px; color: #474645; margin-bottom: 20px;">
+              Hero + Bento Feature + Pricing Table + Tweet Wall + Lead CTA.
             </p>
+            <div style="font-size: 38px; font-weight: 700; color: #121212; margin-bottom: 24px;">
+              $49 <span style="font-size: 14px; font-weight: 400; color: #7e7e7d;">one-time</span>
+            </div>
+
+            <ul style="list-style: none; padding: 0; margin: 0 0 28px 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: #474645;">
+              <li>✓ 5 Core Landing Page Sections</li>
+              <li>✓ Complete Page Stack integration</li>
+              <li>✓ Figma source file included</li>
+              <li>✓ Perpetual commercial license</li>
+              <li>✓ Lifetime updates on these 5 sections</li>
+            </ul>
+
+            <div style="margin-top: auto;">
+              <button 
+                type="button" 
+                onclick="window.azarelAddBundleToCart('bundle-starter-pack')" 
+                class="btn-sand-pill" 
+                style="width: 100%; padding: 12px; font-size: 14px;"
+              >
+                Buy Launch Pack ($49)
+              </button>
+            </div>
           </div>
 
-          <div style="overflow-x: auto;">
-            <table style="width: 100%; border-collapse: collapse; font-size: 14px; text-align: left;">
-              <thead>
-                <tr style="border-bottom: 1px solid var(--color-cloud);">
-                  <th style="padding: 16px; font-weight: 600; color: var(--color-obsidian);">Capability</th>
-                  <th style="padding: 16px; font-weight: 600; color: var(--color-obsidian);">Community</th>
-                  <th style="padding: 16px; font-weight: 600; color: var(--color-obsidian);">Pro Designer</th>
-                  <th style="padding: 16px; font-weight: 600; color: var(--color-obsidian);">Team All-Access</th>
-                </tr>
-              </thead>
-              <tbody style="color: var(--color-graphite);">
-                <tr style="border-bottom: 1px solid var(--color-cloud);">
-                  <td style="padding: 16px; font-weight: 500;">Marketing Hero Sections</td>
-                  <td style="padding: 16px;">1 Section</td>
-                  <td style="padding: 16px;">All 8+ Sections</td>
-                  <td style="padding: 16px;">All + Future Drops</td>
-                </tr>
-                <tr style="border-bottom: 1px solid var(--color-cloud);">
-                  <td style="padding: 16px; font-weight: 500;">Interactive UI Components</td>
-                  <td style="padding: 16px;">2 Components</td>
-                  <td style="padding: 16px;">All 12+ Components</td>
-                  <td style="padding: 16px;">All + Private Staging</td>
-                </tr>
-                <tr style="border-bottom: 1px solid var(--color-cloud);">
-                  <td style="padding: 16px; font-weight: 500;">24px Precision Icons</td>
-                  <td style="padding: 16px;">40 SVGs</td>
-                  <td style="padding: 16px;">180+ SVGs &amp; React</td>
-                  <td style="padding: 16px;">Full Source + AI Vector</td>
-                </tr>
-                <tr style="border-bottom: 1px solid var(--color-cloud);">
-                  <td style="padding: 16px; font-weight: 500;">Commercial Client Licenses</td>
-                  <td style="padding: 16px;">Non-commercial only</td>
-                  <td style="padding: 16px;">Unlimited Commercial</td>
-                  <td style="padding: 16px;">Enterprise Perpetual</td>
-                </tr>
-              </tbody>
-            </table>
+          <!-- Tier 3: All-Access Pass (Highlighted) -->
+          <div class="card-hairline" style="box-shadow: inset 0 0 0 2px #121212; position: relative; display: flex; flex-direction: column; background: #ffffff;">
+            <div style="position: absolute; top: -12px; right: 24px; background: #00ca48; color: #121212; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 9999px;">
+              ✦ BEST VALUE • LIFETIME PASS
+            </div>
+            <div style="font-size: 14px; font-weight: 600; color: #0086fc; text-transform: uppercase; margin-bottom: 6px;">
+              Everything Unlimited
+            </div>
+            <h3 style="font-size: 22px; font-weight: 600; color: #121212; margin-bottom: 8px;">All-Access Section Pass</h3>
+            <p style="font-size: 14px; color: #474645; margin-bottom: 20px;">
+              Every current and future website section dropped into the catalog forever.
+            </p>
+            <div style="font-size: 38px; font-weight: 700; color: #121212; margin-bottom: 24px;">
+              $99 <span style="font-size: 14px; font-weight: 400; color: #7e7e7d;">lifetime</span>
+            </div>
+
+            <ul style="list-style: none; padding: 0; margin: 0 0 28px 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: #474645;">
+              <li>✓ All 16+ Website Sections</li>
+              <li>✓ Complete Interactive Page Stack Mixer access</li>
+              <li>✓ Full Figma Component Design System</li>
+              <li>✓ All future section drops included free</li>
+              <li>✓ Unlimited commercial &amp; client projects</li>
+              <li>✓ Direct priority Discord &amp; email support</li>
+            </ul>
+
+            <div style="margin-top: auto;">
+              <button 
+                type="button" 
+                onclick="window.azarelAddBundleToCart('bundle-all-access')" 
+                class="btn-dark-pill" 
+                style="width: 100%; padding: 12px; font-size: 14px;"
+              >
+                Get All-Access Lifetime Pass ($99)
+              </button>
+            </div>
           </div>
         </div>
-      </section>
+
+        <!-- FAQ Section -->
+        <div style="max-width: 800px; margin: 0 auto;">
+          <h2 style="font-size: 28px; font-weight: 600; color: #121212; margin-bottom: 24px; text-align: center;">
+            Frequently Asked Questions
+          </h2>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div class="card-hairline" style="padding: 20px;">
+              <h4 style="font-size: 16px; font-weight: 600; color: #121212; margin-bottom: 6px;">
+                What code frameworks are included?
+              </h4>
+              <p style="font-size: 14px; color: #474645; line-height: 1.5;">
+                Every section includes typed React 19 JSX components, clean Tailwind CSS v4 utility classes, and vanilla HTML/CSS templates.
+              </p>
+            </div>
+
+            <div class="card-hairline" style="padding: 20px;">
+              <h4 style="font-size: 16px; font-weight: 600; color: #121212; margin-bottom: 6px;">
+                Can I use these sections in commercial client websites?
+              </h4>
+              <p style="font-size: 14px; color: #474645; line-height: 1.5;">
+                Yes! Every purchase comes with an unlimited perpetual commercial license. You can use them for SaaS applications, client work, internal tools, and agency projects.
+              </p>
+            </div>
+
+            <div class="card-hairline" style="padding: 20px;">
+              <h4 style="font-size: 16px; font-weight: 600; color: #121212; margin-bottom: 6px;">
+                How does the Family design aesthetic work?
+              </h4>
+              <p style="font-size: 14px; color: #474645; line-height: 1.5;">
+                Family speaks in a warm parchment-and-marker language: cream paper canvas (#fbfaf9), inset hairline borders (#f2f0ed) instead of drop shadows, cartoon mascots, and clean Inter typography.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   `;
 }

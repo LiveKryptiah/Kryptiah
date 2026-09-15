@@ -1,87 +1,167 @@
 /**
- * PreviewModal Component
- * Full-fidelity interactive preview modal with responsive preview controls,
- * syntax code copy, and direct product detail links.
+ * PreviewModal Component — Family Style Reference
+ * Fullscreen Interactive Section Previewer:
+ * - Device Switcher: Desktop (1200px), Tablet (768px), Mobile (375px)
+ * - Multi-Framework Code Copier: React 19 JSX, Tailwind v4, HTML/CSS
+ * - Direct Add to Cart & Stack Mixer triggers
  */
 
 import { state } from '../state.js';
 
 export function renderPreviewModal() {
-  const product = state.previewProduct;
-  if (!product) return '';
+  const section = state.previewSection;
+  if (!section) return '';
+
+  const activeDevice = state.previewDevice;
+  const activeTab = state.activeCodeTab;
+  const inMixer = state.mixerStack.includes(section.id);
+
+  let currentCode = section.codeReact;
+  if (activeTab === 'tailwind') currentCode = section.codeTailwind;
+  if (activeTab === 'html') currentCode = section.codeHtml;
 
   return `
-    <div id="preview-modal" class="modal-overlay active" onclick="if(event.target === this) window.azarelClosePreview()">
-      <div class="modal-card">
-        <!-- Modal Header -->
-        <div style="padding: 20px 28px; border-bottom: 1px solid var(--color-cloud); display: flex; align-items: center; justify-content: space-between;">
-          <div style="display: flex; align-items: center; gap: 12px;">
-            <span class="badge-ember" style="font-size: 11px;">LIVE PREVIEW</span>
-            <h2 style="font-size: 18px; font-weight: 600; color: var(--color-obsidian);">${product.name}</h2>
+    <div class="modal-backdrop" onclick="window.azarelCloseModal(event)">
+      <div class="modal-container" onclick="event.stopPropagation()">
+        <!-- Modal Top Navigation Bar -->
+        <div class="modal-header">
+          <!-- Left: Section Title & Archetype -->
+          <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+            <div style="display: flex; flex-direction: column;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <h3 style="font-size: 18px; font-weight: 600; color: #121212; margin: 0;">${section.name}</h3>
+                <span class="badge-status ${section.isFree ? 'badge-mint' : 'badge-honey'}">
+                  ${section.isFree ? 'Freebie' : `$${section.price}`}
+                </span>
+              </div>
+              <span style="font-size: 12px; color: #7e7e7d;">${section.categoryLabel} • ${section.framework}</span>
+            </div>
           </div>
 
+          <!-- Center: Device Switcher (Desktop, Tablet, Mobile) -->
+          <div class="device-switcher">
+            <button 
+              type="button" 
+              onclick="window.azarelSetDevice('desktop')" 
+              class="device-btn ${activeDevice === 'desktop' ? 'active' : ''}" 
+              title="Desktop View (1200px)"
+            >
+              🖥 Desktop
+            </button>
+            <button 
+              type="button" 
+              onclick="window.azarelSetDevice('tablet')" 
+              class="device-btn ${activeDevice === 'tablet' ? 'active' : ''}" 
+              title="Tablet View (768px)"
+            >
+              📱 Tablet
+            </button>
+            <button 
+              type="button" 
+              onclick="window.azarelSetDevice('mobile')" 
+              class="device-btn ${activeDevice === 'mobile' ? 'active' : ''}" 
+              title="Mobile View (375px)"
+            >
+              📲 Mobile
+            </button>
+          </div>
+
+          <!-- Right: Actions & Close -->
           <div style="display: flex; align-items: center; gap: 10px;">
-            <a href="#/product/${product.slug}" onclick="window.azarelClosePreview()" class="btn-ghost" style="padding: 7px 14px; font-size: 13px;">
-              Full Details ↗
-            </a>
-            <button onclick="window.azarelClosePreview()" class="btn-ghost" style="padding: 7px 12px; font-size: 14px;" aria-label="Close modal">
+            <button 
+              type="button" 
+              onclick="window.azarelToggleMixer('${section.id}')" 
+              class="btn-sand-pill" 
+              style="font-size: 13px; padding: 7px 14px;"
+            >
+              ${inMixer ? '✓ In Stack' : '+ Stack Section'}
+            </button>
+
+            <button 
+              type="button" 
+              onclick="window.azarelAddToCart('${section.id}')" 
+              class="btn-dark-pill" 
+              style="font-size: 13px; padding: 7px 16px;"
+            >
+              ${section.isFree ? 'Download Freebie' : `Buy Section ($${section.price})`}
+            </button>
+
+            <button 
+              type="button" 
+              onclick="window.azarelCloseModal()" 
+              class="btn-ghost" 
+              style="font-size: 24px; color: #7e7e7d; line-height: 1; padding: 4px 8px;"
+              aria-label="Close Preview"
+            >
               ✕
             </button>
           </div>
         </div>
 
-        <!-- Modal Content -->
-        <div style="padding: 28px;">
-          <!-- Simulated Live Viewport -->
-          <div style="border: 1px solid var(--color-cloud); border-radius: 20px; overflow: hidden; background: #ffffff; margin-bottom: 24px;">
-            <div style="background: #f4f4f5; padding: 10px 16px; border-bottom: 1px solid var(--color-cloud); display: flex; align-items: center; justify-content: space-between;">
-              <div style="display: flex; gap: 6px;">
-                <span style="width: 10px; height: 10px; border-radius: 50%; background: #d4d4d8;"></span>
-                <span style="width: 10px; height: 10px; border-radius: 50%; background: #d4d4d8;"></span>
-                <span style="width: 10px; height: 10px; border-radius: 50%; background: #d4d4d8;"></span>
+        <!-- Modal Body: Split into Interactive Viewport and Code Copier -->
+        <div class="modal-body-scroll">
+          <!-- Device Viewport Container -->
+          <div class="viewport-canvas-wrapper">
+            <div class="viewport-frame viewport-${activeDevice}">
+              <div class="viewport-content">
+                ${section.previewHtml}
               </div>
-              <span style="font-size: 12px; color: var(--color-steel); font-family: monospace;">azarel.system/preview/${product.slug}</span>
-              <span class="tag-pill" style="font-size: 11px;">${product.framework || 'React'}</span>
-            </div>
-            <div style="min-height: 240px; max-height: 380px; overflow-y: auto;">
-              ${product.previewHtml || `<div style="padding: 40px; text-align: center;"><img src="${product.image}" style="max-height: 220px; border-radius: 12px;" /></div>`}
             </div>
           </div>
 
-          <!-- Code Snippet Box -->
-          <div class="code-preview-box">
-            <div class="code-header">
-              <span style="font-size: 12px; color: #a1a1aa; font-family: monospace;">component.tsx</span>
+          <!-- Code Inspector & Asset Details Section -->
+          <div class="code-inspector-card">
+            <!-- Tabs -->
+            <div class="code-tabs-header">
+              <div style="display: flex; gap: 8px;">
+                <button 
+                  type="button" 
+                  onclick="window.azarelSetCodeTab('react')" 
+                  class="code-tab ${activeTab === 'react' ? 'active' : ''}"
+                >
+                  ⚛ React 19 JSX
+                </button>
+                <button 
+                  type="button" 
+                  onclick="window.azarelSetCodeTab('tailwind')" 
+                  class="code-tab ${activeTab === 'tailwind' ? 'active' : ''}"
+                >
+                  🌊 Tailwind CSS v4
+                </button>
+                <button 
+                  type="button" 
+                  onclick="window.azarelSetCodeTab('html')" 
+                  class="code-tab ${activeTab === 'html' ? 'active' : ''}"
+                >
+                  📄 Vanilla HTML &amp; CSS
+                </button>
+              </div>
+
+              <!-- Copy Code Button -->
               <button 
-                type="button"
-                onclick="navigator.clipboard.writeText(decodeURIComponent('${encodeURIComponent(product.codeSnippet)}')); window.dispatchEvent(new CustomEvent('azarel:toast', { detail: { message: 'Code copied to clipboard!' } }))" 
-                class="btn-primary" 
-                style="padding: 6px 14px; font-size: 12px; border-radius: 10px; background: #27272a; border-color: #3f3f46;"
+                type="button" 
+                onclick="window.azarelCopyCode('${section.id}')" 
+                class="btn-sand-pill" 
+                style="display: flex; align-items: center; gap: 6px; padding: 6px 14px; font-size: 12px;"
               >
-                Copy Code
+                📋 Copy Code Snippet
               </button>
             </div>
-            <pre class="code-content"><code>${escapeHtml(product.codeSnippet)}</code></pre>
-          </div>
-        </div>
 
-        <!-- Modal Footer -->
-        <div style="padding: 16px 28px; background: #fafafa; border-top: 1px solid var(--color-cloud); display: flex; align-items: center; justify-content: space-between; border-radius: 0 0 36px 36px;">
-          <div style="display: flex; gap: 8px;">
-            ${product.tags.map(t => `<span class="tag-pill">${t}</span>`).join('')}
-          </div>
-          <div style="display: flex; gap: 12px; align-items: center;">
-            <span style="font-size: 18px; font-weight: 700; color: var(--color-obsidian);">
-              ${product.isFree ? 'Free' : `$${product.price}`}
-            </span>
-            <a 
-              href="#/product/${product.slug}" 
-              onclick="window.azarelClosePreview()" 
-              class="btn-primary" 
-              style="padding: 9px 18px; font-size: 13.5px;"
-            >
-              ${product.isFree ? 'Download Freebie' : 'Purchase License'}
-            </a>
+            <!-- Code Snippet Area -->
+            <pre class="code-snippet-box"><code>${escapeHtml(currentCode)}</code></pre>
+
+            <!-- Metadata Features -->
+            <div style="margin-top: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; font-size: 13px;">
+              <div style="background: #ffffff; padding: 12px; border-radius: 8px; box-shadow: inset 0 0 0 1px #f2f0ed;">
+                <div style="font-weight: 600; color: #121212; margin-bottom: 4px;">Included with License:</div>
+                <div style="color: #474645;">${section.included.join(' • ')}</div>
+              </div>
+              <div style="background: #ffffff; padding: 12px; border-radius: 8px; box-shadow: inset 0 0 0 1px #f2f0ed;">
+                <div style="font-weight: 600; color: #121212; margin-bottom: 4px;">Design Standard:</div>
+                <div style="color: #474645;">Family Design Tokens • Inter Font • Hairline Borders</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -89,11 +169,33 @@ export function renderPreviewModal() {
   `;
 }
 
-function escapeHtml(str) {
-  return str
+function escapeHtml(text = '') {
+  return text
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
 }
+
+// Global Handlers
+window.azarelCloseModal = (e) => {
+  if (!e || e.target === e.currentTarget || e.target.getAttribute('aria-label') === 'Close Preview' || e.target.innerText === '✕') {
+    state.closePreview();
+  }
+};
+window.azarelSetDevice = (device) => state.setPreviewDevice(device);
+window.azarelSetCodeTab = (tab) => state.setActiveCodeTab(tab);
+window.azarelCopyCode = (id) => {
+  const section = state.previewSection;
+  if (!section) return;
+  let code = section.codeReact;
+  if (state.activeCodeTab === 'tailwind') code = section.codeTailwind;
+  if (state.activeCodeTab === 'html') code = section.codeHtml;
+
+  navigator.clipboard.writeText(code).then(() => {
+    state.notifyToast(`Copied ${state.activeCodeTab.toUpperCase()} code to clipboard!`);
+  }).catch(() => {
+    state.notifyToast('Copied to clipboard');
+  });
+};
