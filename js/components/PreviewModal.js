@@ -1,7 +1,7 @@
 /**
  * PreviewModal Component — Linear Style Reference (design.md)
  * Fullscreen Interactive Section & Specification Inspector:
- * - View Mode Switcher: [ Preview | design.md Spec | Split ]
+ * - View Mode Switcher: [ Preview | design.md ] (Split removed per user request)
  * - Responsive Device Switcher: Desktop (1200px), Tablet (768px), Mobile (375px)
  * - Pure Design System Specification Viewer (Zero Code Blocks)
  * - Direct Add to Cart & Stack Mixer triggers
@@ -16,7 +16,7 @@ export function renderPreviewModal() {
   if (!section) return '';
 
   const activeDevice = state.previewDevice;
-  const viewMode = state.modalViewMode || 'split';
+  const viewMode = state.modalViewMode === 'spec' ? 'spec' : 'preview';
   const inMixer = state.mixerStack.includes(section.id);
 
   return `
@@ -43,7 +43,7 @@ export function renderPreviewModal() {
 
           <!-- Center: View Mode & Device Switcher -->
           <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center;">
-            <!-- Primary Mode Switcher: Preview vs design.md vs Split -->
+            <!-- Primary Mode Switcher: ONLY Preview vs design.md (No Split) -->
             <div style="display: inline-flex; background: #f2f0ed; padding: 3px; border-radius: 9999px; gap: 2px;">
               <button 
                 type="button" 
@@ -61,18 +61,10 @@ export function renderPreviewModal() {
               >
                 design.md
               </button>
-              <button 
-                type="button" 
-                onclick="window.azarelSetModalViewMode('split')" 
-                class="mode-pill-btn ${viewMode === 'split' ? 'active' : ''}"
-                title="Split View (Preview + Spec)"
-              >
-                Split
-              </button>
             </div>
 
-            <!-- Device Switcher (Visible when viewport is active) -->
-            ${viewMode !== 'spec' ? `
+            <!-- Device Switcher (Visible strictly when Preview Viewport is active) -->
+            ${viewMode === 'preview' ? `
               <div class="device-switcher">
                 <button 
                   type="button" 
@@ -140,25 +132,23 @@ export function renderPreviewModal() {
           </div>
         </div>
 
-        <!-- Modal Body: Interactive Viewport and/or design.md Spec -->
+        <!-- Modal Body: EITHER Preview Viewport OR design.md Spec (Zero Split) -->
         <div class="modal-body-scroll">
-          <!-- 1. Viewport Canvas (Shown in preview and split modes) -->
-          ${viewMode !== 'spec' ? `
-            <div class="viewport-canvas-wrapper" style="${viewMode === 'preview' ? 'min-height: 520px;' : ''}">
+          ${viewMode === 'preview' ? `
+            <!-- 1. Pure Viewport Canvas -->
+            <div class="viewport-canvas-wrapper" style="min-height: 540px;">
               <div class="viewport-frame viewport-${activeDevice}">
                 <div class="viewport-content">
                   ${section.previewHtml}
                 </div>
               </div>
             </div>
-          ` : ''}
-
-          <!-- 2. design.md Specification Inspector (Zero Code Blocks) -->
-          ${viewMode !== 'preview' ? `
-            <div style="${viewMode === 'spec' ? 'max-width: 1100px; margin: 0 auto;' : 'margin-top: 20px;'}">
+          ` : `
+            <!-- 2. Pure design.md Specification Inspector -->
+            <div style="max-width: 1100px; margin: 0 auto;">
               ${renderSpecInspector(section, state.activeSpecTab)}
             </div>
-          ` : ''}
+          `}
         </div>
       </div>
     </div>

@@ -84,7 +84,7 @@ export function renderHomeView() {
       <!-- 2. EXPLORE SECTIONS (Minimal Fullscreen Section Showcase) -->
       <section class="section-fullscreen" style="border-top: 1px solid #f2f0ed;">
         <div class="container">
-          <!-- Minimal Showcase Header with Mode Switcher -->
+          <!-- Minimal Showcase Header -->
           <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px; flex-wrap: wrap; gap: 16px;">
             <div>
               <div style="display: inline-flex; align-items: center; gap: 6px; background: #f2f0ed; padding: 4px 12px; border-radius: 9999px; margin-bottom: 8px;">
@@ -95,31 +95,9 @@ export function renderHomeView() {
               </h2>
             </div>
 
-            <!-- Global Showcase Mode Switcher: Live Previews vs design.md Specs -->
-            <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
-              <div style="display: inline-flex; background: #f2f0ed; padding: 3px; border-radius: 9999px; gap: 2px;">
-                <button 
-                  type="button" 
-                  onclick="window.azarelSetShowcaseMode('preview')" 
-                  class="mode-pill-btn ${state.showcaseMode === 'preview' ? 'active' : ''}"
-                  title="Show Live Visual Previews"
-                >
-                  Live Previews
-                </button>
-                <button 
-                  type="button" 
-                  onclick="window.azarelSetShowcaseMode('design')" 
-                  class="mode-pill-btn ${state.showcaseMode === 'design' ? 'active' : ''}"
-                  title="Show design.md Specifications"
-                >
-                  design.md Specs
-                </button>
-              </div>
-
-              <a href="#/sections" class="link-demo" style="font-size: 14px; font-weight: 600;">
-                View all 16 sections in marketplace →
-              </a>
-            </div>
+            <a href="#/sections" class="link-demo" style="font-size: 14px; font-weight: 600;">
+              View all 16 sections in marketplace →
+            </a>
           </div>
 
           <!-- Minimal 3-Card Showcase Grid -->

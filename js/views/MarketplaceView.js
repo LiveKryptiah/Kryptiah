@@ -123,30 +123,9 @@ export function renderMarketplaceView() {
         </div>
 
         <!-- Section Results Count & Active Stack Indicator -->
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; font-size: 14px; color: #7e7e7d; flex-wrap: wrap; gap: 12px;">
-          <div style="display: flex; align-items: center; gap: 14px;">
-            <span>Showing <strong>${filteredSections.length}</strong> website sections</span>
-            <!-- Mode Switcher: Previews vs design.md -->
-            <div style="display: inline-flex; background: #f2f0ed; padding: 2px; border-radius: 9999px; gap: 2px;">
-              <button 
-                type="button" 
-                onclick="window.azarelSetShowcaseMode('preview')" 
-                class="mode-pill-btn ${state.showcaseMode === 'preview' ? 'active' : ''}"
-                style="padding: 3px 10px; font-size: 11px;"
-                title="Switch all cards to Live Previews"
-              >
-                Previews
-              </button>
-              <button 
-                type="button" 
-                onclick="window.azarelSetShowcaseMode('design')" 
-                class="mode-pill-btn ${state.showcaseMode === 'design' ? 'active' : ''}"
-                style="padding: 3px 10px; font-size: 11px;"
-                title="Switch all cards to design.md specs"
-              >
-                design.md
-              </button>
-            </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; font-size: 14px; color: #7e7e7d;">
+          <div>
+            Showing <strong>${filteredSections.length}</strong> website sections
           </div>
           <div style="display: flex; align-items: center; gap: 10px;">
             <span>Mixer Stack: <strong>${state.mixerStack.length} sections</strong></span>

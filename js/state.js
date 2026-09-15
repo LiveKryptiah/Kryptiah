@@ -30,7 +30,7 @@ class AppState {
     this.previewSection = null;
     this.previewDevice = 'desktop'; // 'desktop' | 'tablet' | 'mobile'
     this.activeSpecTab = 'directives'; // 'directives' | 'tokens' | 'typography' | 'prompt' | 'raw'
-    this.modalViewMode = 'split'; // 'split' | 'spec' | 'preview'
+    this.modalViewMode = 'preview'; // 'preview' | 'spec'
     this.cardModes = {}; // sectionId -> 'preview' | 'design'
     this.showcaseMode = 'preview'; // 'preview' | 'design'
 
@@ -155,11 +155,7 @@ class AppState {
     const sec = SECTIONS_DATA.find(s => s.id === sectionId || s.slug === sectionId);
     if (sec) {
       this.previewSection = sec;
-      if (initialTab === 'design' || initialTab === 'spec') {
-        this.modalViewMode = 'spec';
-      } else {
-        this.modalViewMode = 'split';
-      }
+      this.modalViewMode = (initialTab === 'design' || initialTab === 'spec') ? 'spec' : 'preview';
       this.activeSpecTab = initialSpecTab;
       this.notify();
     }
@@ -181,7 +177,7 @@ class AppState {
   }
 
   setModalViewMode(mode) {
-    this.modalViewMode = mode;
+    this.modalViewMode = (mode === 'spec' || mode === 'design') ? 'spec' : 'preview';
     this.notify();
   }
 
