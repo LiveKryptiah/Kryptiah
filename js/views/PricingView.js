@@ -5,10 +5,11 @@
 
 import { BUNDLES } from '../data/products.js';
 import { state } from '../state.js';
+import { Icons } from '../components/Icons.js';
 
 export function renderPricingView() {
   return `
-    <div class="pricing-page" style="padding: 48px 0 80px 0;">
+    <div class="pricing-page" style="padding: 48px 0 80px 0; min-height: calc(100vh - 64px);">
       <div class="container">
         <!-- Header -->
         <div style="text-align: center; max-width: 640px; margin: 0 auto 48px auto;">
@@ -39,11 +40,11 @@ export function renderPricingView() {
             </div>
 
             <ul style="list-style: none; padding: 0; margin: 0 0 28px 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: #474645;">
-              <li>✓ Full React 19 JSX component code</li>
-              <li>✓ Tailwind CSS v4 utility classes</li>
-              <li>✓ Mobile, tablet &amp; desktop tested</li>
-              <li>✓ Perpetual commercial license</li>
-              <li>✕ Access to other sections</li>
+              <li style="display: flex; align-items: center; gap: 8px;">${Icons.check(13, '#00ca48')} Full React 19 JSX component code</li>
+              <li style="display: flex; align-items: center; gap: 8px;">${Icons.check(13, '#00ca48')} Tailwind CSS v4 utility classes</li>
+              <li style="display: flex; align-items: center; gap: 8px;">${Icons.check(13, '#00ca48')} Mobile, tablet &amp; desktop tested</li>
+              <li style="display: flex; align-items: center; gap: 8px;">${Icons.check(13, '#00ca48')} Perpetual commercial license</li>
+              <li style="display: flex; align-items: center; gap: 8px; color: #a1a1aa;">${Icons.close(13, '#a1a1aa')} Access to other sections</li>
             </ul>
 
             <div style="margin-top: auto;">
@@ -67,11 +68,11 @@ export function renderPricingView() {
             </div>
 
             <ul style="list-style: none; padding: 0; margin: 0 0 28px 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: #474645;">
-              <li>✓ 5 Core Landing Page Sections</li>
-              <li>✓ Complete Page Stack integration</li>
-              <li>✓ Figma source file included</li>
-              <li>✓ Perpetual commercial license</li>
-              <li>✓ Lifetime updates on these 5 sections</li>
+              <li style="display: flex; align-items: center; gap: 8px;">${Icons.check(13, '#00ca48')} 5 Core Landing Page Sections</li>
+              <li style="display: flex; align-items: center; gap: 8px;">${Icons.check(13, '#00ca48')} Complete Page Stack integration</li>
+              <li style="display: flex; align-items: center; gap: 8px;">${Icons.check(13, '#00ca48')} Figma source file included</li>
+              <li style="display: flex; align-items: center; gap: 8px;">${Icons.check(13, '#00ca48')} Perpetual commercial license</li>
+              <li style="display: flex; align-items: center; gap: 8px;">${Icons.check(13, '#00ca48')} Lifetime updates on these 5 sections</li>
             </ul>
 
             <div style="margin-top: auto;">
@@ -88,8 +89,9 @@ export function renderPricingView() {
 
           <!-- Tier 3: All-Access Pass (Highlighted) -->
           <div class="card-hairline" style="box-shadow: inset 0 0 0 2px #121212; position: relative; display: flex; flex-direction: column; background: #ffffff;">
-            <div style="position: absolute; top: -12px; right: 24px; background: #00ca48; color: #121212; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 9999px;">
-              ✦ BEST VALUE • LIFETIME PASS
+            <div style="position: absolute; top: -12px; right: 24px; background: #00ca48; color: #121212; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 9999px; display: inline-flex; align-items: center; gap: 5px;">
+              ${Icons.sparkle(12, '#121212')}
+              <span>BEST VALUE • LIFETIME PASS</span>
             </div>
             <div style="font-size: 14px; font-weight: 600; color: #0086fc; text-transform: uppercase; margin-bottom: 6px;">
               Everything Unlimited
@@ -103,12 +105,12 @@ export function renderPricingView() {
             </div>
 
             <ul style="list-style: none; padding: 0; margin: 0 0 28px 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: #474645;">
-              <li>✓ All 16+ Website Sections</li>
-              <li>✓ Complete Interactive Page Stack Mixer access</li>
-              <li>✓ Full Figma Component Design System</li>
-              <li>✓ All future section drops included free</li>
-              <li>✓ Unlimited commercial &amp; client projects</li>
-              <li>✓ Direct priority Discord &amp; email support</li>
+              <li style="display: flex; align-items: center; gap: 8px;">${Icons.check(13, '#00ca48')} All 16+ Website Sections</li>
+              <li style="display: flex; align-items: center; gap: 8px;">${Icons.check(13, '#00ca48')} Complete Interactive Page Stack Mixer access</li>
+              <li style="display: flex; align-items: center; gap: 8px;">${Icons.check(13, '#00ca48')} Full Figma Component Design System</li>
+              <li style="display: flex; align-items: center; gap: 8px;">${Icons.check(13, '#00ca48')} All future section drops included free</li>
+              <li style="display: flex; align-items: center; gap: 8px;">${Icons.check(13, '#00ca48')} Unlimited commercial &amp; client projects</li>
+              <li style="display: flex; align-items: center; gap: 8px;">${Icons.check(13, '#00ca48')} Direct priority Discord &amp; email support</li>
             </ul>
 
             <div style="margin-top: auto;">

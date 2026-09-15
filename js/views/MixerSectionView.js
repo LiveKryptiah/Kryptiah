@@ -1,10 +1,12 @@
 /**
  * MixerSectionView Component — Interactive Page Stack Mixer
  * Allows users to assemble sections into a complete webpage and test live responsiveness.
+ * Clean SVG icons (zero emojis).
  */
 
 import { SECTIONS_DATA } from '../data/products.js';
 import { state } from '../state.js';
+import { Icons } from '../components/Icons.js';
 
 export function renderMixerSectionView() {
   const currentStackIds = state.mixerStack;
@@ -19,14 +21,15 @@ export function renderMixerSectionView() {
   const stackTotal = stackedSections.reduce((sum, s) => sum + (s.price || 0), 0);
 
   return `
-    <div class="mixer-page" style="padding: 40px 0 80px 0;">
+    <div class="mixer-page" style="padding: 40px 0 80px 0; min-height: calc(100vh - 64px);">
       <div class="container">
         <!-- Header -->
         <div class="mixer-header">
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
             <div>
-              <div style="display: inline-flex; align-items: center; gap: 6px; background: #f2f0ed; padding: 4px 12px; border-radius: 9999px; margin-bottom: 8px;">
-                <span style="font-size: 11px; font-weight: 700; color: #00ca48; text-transform: uppercase;">✦ LIVE PAGE BUILDER</span>
+              <div style="display: inline-flex; align-items: center; gap: 6px; background: #00ca48; color: #121212; padding: 3px 12px; border-radius: 9999px; margin-bottom: 8px;">
+                ${Icons.sparkle(12, '#121212')}
+                <span style="font-size: 11px; font-weight: 700; text-transform: uppercase;">LIVE PAGE BUILDER</span>
               </div>
               <h1 style="font-size: 32px; font-weight: 600; color: #121212; margin-bottom: 6px;">
                 Interactive Page Stack Mixer
@@ -44,22 +47,28 @@ export function renderMixerSectionView() {
                   type="button" 
                   onclick="window.azarelSetDevice('desktop')" 
                   class="device-btn ${activeDevice === 'desktop' ? 'active' : ''}"
+                  style="display: inline-flex; align-items: center; gap: 6px;"
                 >
-                  🖥 Desktop
+                  ${Icons.desktop(14)}
+                  <span>Desktop</span>
                 </button>
                 <button 
                   type="button" 
                   onclick="window.azarelSetDevice('tablet')" 
                   class="device-btn ${activeDevice === 'tablet' ? 'active' : ''}"
+                  style="display: inline-flex; align-items: center; gap: 6px;"
                 >
-                  📱 Tablet
+                  ${Icons.tablet(14)}
+                  <span>Tablet</span>
                 </button>
                 <button 
                   type="button" 
                   onclick="window.azarelSetDevice('mobile')" 
                   class="device-btn ${activeDevice === 'mobile' ? 'active' : ''}"
+                  style="display: inline-flex; align-items: center; gap: 6px;"
                 >
-                  📲 Mobile
+                  ${Icons.mobile(14)}
+                  <span>Mobile</span>
                 </button>
               </div>
 
@@ -123,23 +132,24 @@ export function renderMixerSectionView() {
                     <!-- Control Bar on Top of Each Slot -->
                     <div class="mixer-slot-bar">
                       <span>#${idx + 1} — ${sec.name}</span>
-                      <div style="display: flex; align-items: center; gap: 10px;">
-                        <span style="font-size: 11px; color: ${sec.isFree ? '#00ca48' : '#121212'};">
+                      <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 11px; font-weight: 600; color: ${sec.isFree ? '#00ca48' : '#121212'};">
                           ${sec.isFree ? 'Freebie' : `$${sec.price}`}
                         </span>
                         <button 
                           type="button" 
                           onclick="window.azarelOpenPreview('${sec.id}', 'code')" 
-                          style="font-size: 11px; color: #ff3e00; text-decoration: underline;"
+                          style="font-size: 11px; color: #ff3e00; text-decoration: underline; background: none; border: none; cursor: pointer;"
                         >
                           View Code
                         </button>
                         <button 
                           type="button" 
                           onclick="window.azarelRemoveFromMixer('${sec.id}')" 
-                          style="font-size: 11px; color: #ff2b3a; text-decoration: underline;"
+                          style="font-size: 11px; color: #ff2b3a; display: inline-flex; align-items: center; gap: 4px; background: none; border: none; cursor: pointer;"
                         >
-                          ✕ Remove
+                          ${Icons.close(12, '#ff2b3a')}
+                          <span>Remove</span>
                         </button>
                       </div>
                     </div>

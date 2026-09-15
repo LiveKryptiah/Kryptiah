@@ -7,6 +7,7 @@ import { state } from './state.js';
 import { initRouter, handleRoute } from './router.js';
 import { renderCartDrawer } from './components/CartDrawer.js';
 import { renderPreviewModal } from './components/PreviewModal.js';
+import { Icons } from './components/Icons.js';
 
 // --- Toast Notification Manager ---
 function initToasts() {
@@ -23,7 +24,7 @@ function initToasts() {
     const toast = document.createElement('div');
     toast.className = 'toast';
     toast.innerHTML = `
-      <span style="color: #00ca48; font-weight: bold; font-size: 14px;">✓</span>
+      <span style="display: flex; align-items: center;">${Icons.check(15, '#00ca48')}</span>
       <span>${msg}</span>
     `;
     toastContainer.appendChild(toast);

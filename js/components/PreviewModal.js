@@ -7,6 +7,7 @@
  */
 
 import { state } from '../state.js';
+import { Icons } from './Icons.js';
 
 export function renderPreviewModal() {
   const section = state.previewSection;
@@ -45,24 +46,30 @@ export function renderPreviewModal() {
               onclick="window.azarelSetDevice('desktop')" 
               class="device-btn ${activeDevice === 'desktop' ? 'active' : ''}" 
               title="Desktop View (1200px)"
+              style="display: inline-flex; align-items: center; gap: 6px;"
             >
-              🖥 Desktop
+              ${Icons.desktop(14)}
+              <span>Desktop</span>
             </button>
             <button 
               type="button" 
               onclick="window.azarelSetDevice('tablet')" 
               class="device-btn ${activeDevice === 'tablet' ? 'active' : ''}" 
               title="Tablet View (768px)"
+              style="display: inline-flex; align-items: center; gap: 6px;"
             >
-              📱 Tablet
+              ${Icons.tablet(14)}
+              <span>Tablet</span>
             </button>
             <button 
               type="button" 
               onclick="window.azarelSetDevice('mobile')" 
               class="device-btn ${activeDevice === 'mobile' ? 'active' : ''}" 
               title="Mobile View (375px)"
+              style="display: inline-flex; align-items: center; gap: 6px;"
             >
-              📲 Mobile
+              ${Icons.mobile(14)}
+              <span>Mobile</span>
             </button>
           </div>
 
@@ -72,9 +79,9 @@ export function renderPreviewModal() {
               type="button" 
               onclick="window.azarelToggleMixer('${section.id}')" 
               class="btn-sand-pill" 
-              style="font-size: 13px; padding: 7px 14px;"
+              style="font-size: 13px; padding: 7px 14px; display: inline-flex; align-items: center; gap: 4px;"
             >
-              ${inMixer ? '✓ In Stack' : '+ Stack Section'}
+              ${inMixer ? `${Icons.check(12, '#00ca48')} <span>In Stack</span>` : '<span>+ Stack Section</span>'}
             </button>
 
             <button 
@@ -90,10 +97,10 @@ export function renderPreviewModal() {
               type="button" 
               onclick="window.azarelCloseModal()" 
               class="btn-ghost" 
-              style="font-size: 24px; color: #7e7e7d; line-height: 1; padding: 4px 8px;"
+              style="padding: 4px; display: flex; align-items: center; justify-content: center; color: #7e7e7d;"
               aria-label="Close Preview"
             >
-              ✕
+              ${Icons.close(18, '#7e7e7d')}
             </button>
           </div>
         </div>
@@ -118,22 +125,28 @@ export function renderPreviewModal() {
                   type="button" 
                   onclick="window.azarelSetCodeTab('react')" 
                   class="code-tab ${activeTab === 'react' ? 'active' : ''}"
+                  style="display: inline-flex; align-items: center; gap: 6px;"
                 >
-                  ⚛ React 19 JSX
+                  ${Icons.react(14, activeTab === 'react' ? '#0086fc' : '#7e7e7d')}
+                  <span>React 19 JSX</span>
                 </button>
                 <button 
                   type="button" 
                   onclick="window.azarelSetCodeTab('tailwind')" 
                   class="code-tab ${activeTab === 'tailwind' ? 'active' : ''}"
+                  style="display: inline-flex; align-items: center; gap: 6px;"
                 >
-                  🌊 Tailwind CSS v4
+                  ${Icons.tailwind(14, activeTab === 'tailwind' ? '#00b2ff' : '#7e7e7d')}
+                  <span>Tailwind CSS v4</span>
                 </button>
                 <button 
                   type="button" 
                   onclick="window.azarelSetCodeTab('html')" 
                   class="code-tab ${activeTab === 'html' ? 'active' : ''}"
+                  style="display: inline-flex; align-items: center; gap: 6px;"
                 >
-                  📄 Vanilla HTML &amp; CSS
+                  ${Icons.code(14, activeTab === 'html' ? '#121212' : '#7e7e7d')}
+                  <span>Vanilla HTML &amp; CSS</span>
                 </button>
               </div>
 
@@ -142,9 +155,10 @@ export function renderPreviewModal() {
                 type="button" 
                 onclick="window.azarelCopyCode('${section.id}')" 
                 class="btn-sand-pill" 
-                style="display: flex; align-items: center; gap: 6px; padding: 6px 14px; font-size: 12px;"
+                style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; font-size: 12px;"
               >
-                📋 Copy Code Snippet
+                ${Icons.copy(14, '#343433')}
+                <span>Copy Code Snippet</span>
               </button>
             </div>
 
@@ -180,7 +194,7 @@ function escapeHtml(text = '') {
 
 // Global Handlers
 window.azarelCloseModal = (e) => {
-  if (!e || e.target === e.currentTarget || e.target.getAttribute('aria-label') === 'Close Preview' || e.target.innerText === '✕') {
+  if (!e || e.target === e.currentTarget || e.target.getAttribute?.('aria-label') === 'Close Preview' || e.target.closest?.('button[aria-label="Close Preview"]')) {
     state.closePreview();
   }
 };

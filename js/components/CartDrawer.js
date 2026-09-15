@@ -1,10 +1,12 @@
 /**
  * CartDrawer Component — Family Design System
  * Slide-over shopping cart, bundle discounts, and instant simulated checkout modal.
+ * Clean SVG icons (zero emojis).
  */
 
 import { state } from '../state.js';
 import { BUNDLES } from '../data/products.js';
+import { Icons } from './Icons.js';
 
 export function renderCartDrawer() {
   const container = document.getElementById('cart-drawer-root');
@@ -22,8 +24,8 @@ export function renderCartDrawer() {
       <div class="cart-backdrop active" onclick="window.azarelDismissOrder()">
         <div class="checkout-modal" onclick="event.stopPropagation()">
           <div style="text-align: center; margin-bottom: 20px;">
-            <div style="width: 56px; height: 56px; border-radius: 50%; background: #00ca48; color: #121212; display: inline-flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 14px;">
-              ✓
+            <div style="width: 56px; height: 56px; border-radius: 50%; background: #00ca48; color: #121212; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 14px;">
+              ${Icons.check(28, '#121212')}
             </div>
             <h2 style="font-size: 24px; font-weight: 600; color: #121212; margin-bottom: 6px;">Thank you for your purchase!</h2>
             <p style="font-size: 14px; color: #474645;">Your commercial license and source packages are ready.</p>
@@ -49,9 +51,10 @@ export function renderCartDrawer() {
               type="button" 
               onclick="window.azarelDownloadMockZip()" 
               class="btn-dark-pill" 
-              style="width: 100%; padding: 12px; font-size: 14px; text-align: center; justify-content: center;"
+              style="width: 100%; padding: 12px; font-size: 14px; text-align: center; justify-content: center; display: inline-flex; align-items: center; gap: 8px;"
             >
-              📥 Download Source Bundle (.ZIP)
+              ${Icons.download(16, '#ffffff')}
+              <span>Download Source Bundle (.ZIP)</span>
             </button>
             <button 
               type="button" 
@@ -75,7 +78,9 @@ export function renderCartDrawer() {
         <div class="checkout-modal" onclick="event.stopPropagation()">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; border-bottom: 1px solid #f2f0ed; padding-bottom: 12px;">
             <h3 style="font-size: 20px; font-weight: 600; color: #121212;">Express Checkout</h3>
-            <button onclick="window.azarelCloseCheckout()" style="font-size: 20px; color: #7e7e7d;">✕</button>
+            <button onclick="window.azarelCloseCheckout()" style="background: none; border: none; cursor: pointer; color: #7e7e7d;">
+              ${Icons.close(20, '#7e7e7d')}
+            </button>
           </div>
 
           <form onsubmit="event.preventDefault(); window.azarelSubmitCheckout(this);">
@@ -87,7 +92,10 @@ export function renderCartDrawer() {
             <div style="margin-bottom: 16px;">
               <label style="display: block; font-size: 13px; font-weight: 500; color: #343433; margin-bottom: 6px;">Payment Method</label>
               <div style="background: #ffffff; border: 1px solid #e5d5c3; border-radius: 10px; padding: 12px; display: flex; align-items: center; justify-content: space-between;">
-                <span style="font-size: 13px; color: #343433; font-weight: 500;">💳 Test Card (Instant Approval)</span>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  ${Icons.creditCard(18, '#343433')}
+                  <span style="font-size: 13px; color: #343433; font-weight: 500;">Test Card (Instant Approval)</span>
+                </div>
                 <span style="font-size: 11px; background: #f2f0ed; padding: 2px 8px; border-radius: 6px; color: #7e7e7d;">Sandbox Demo</span>
               </div>
             </div>
@@ -124,8 +132,8 @@ export function renderCartDrawer() {
             <h3 style="font-size: 19px; font-weight: 600; color: #121212;">Your Section Cart</h3>
             <span style="font-size: 13px; color: #7e7e7d;">${cartItems.length} ${cartItems.length === 1 ? 'section' : 'sections'} selected</span>
           </div>
-          <button onclick="window.azarelToggleCart(false)" class="btn-ghost" style="font-size: 22px; line-height: 1; padding: 4px 8px;">
-            ✕
+          <button onclick="window.azarelToggleCart(false)" class="btn-ghost" style="padding: 4px; display: flex; align-items: center; justify-content: center;" aria-label="Close Cart">
+            ${Icons.close(18, '#7e7e7d')}
           </button>
         </div>
 
@@ -133,7 +141,9 @@ export function renderCartDrawer() {
         <div class="cart-body">
           ${cartItems.length === 0 ? `
             <div style="text-align: center; padding: 60px 20px;">
-              <div style="font-size: 40px; margin-bottom: 14px;">🛍️</div>
+              <div style="display: flex; justify-content: center; margin-bottom: 14px; color: #a1a1aa;">
+                ${Icons.cart(48, '#a1a1aa')}
+              </div>
               <h4 style="font-size: 17px; font-weight: 600; color: #121212; margin-bottom: 6px;">Your cart is empty</h4>
               <p style="font-size: 14px; color: #7e7e7d; max-width: 240px; margin: 0 auto 20px auto;">
                 Explore our catalog of production-ready website sections to add to your project.
@@ -167,13 +177,16 @@ export function renderCartDrawer() {
 
             <!-- Upsell Banner -->
             <div style="margin-top: 20px; background: #fbfaf9; border-radius: 10px; padding: 14px; box-shadow: inset 0 0 0 1px #f2f0ed;">
-              <div style="font-size: 12px; font-weight: 700; color: #00ca48; margin-bottom: 4px;">✦ ALL-ACCESS UPGRADE</div>
+              <div style="display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #00ca48; margin-bottom: 4px;">
+                ${Icons.sparkle(14, '#00ca48')}
+                <span>ALL-ACCESS UPGRADE</span>
+              </div>
               <div style="font-size: 13px; color: #343433; margin-bottom: 8px;">
                 Get all 16+ sections for <strong>$99 lifetime</strong> instead of paying single item rates.
               </div>
               <button 
                 onclick="window.azarelAddBundleToCart('bundle-all-access')" 
-                style="background: #121212; color: white; padding: 6px 14px; border-radius: 9999px; font-size: 12px; font-weight: 600;"
+                style="background: #121212; color: white; padding: 6px 14px; border-radius: 9999px; font-size: 12px; font-weight: 600; cursor: pointer;"
               >
                 Upgrade to All-Access Pass ($99)
               </button>
@@ -195,8 +208,9 @@ export function renderCartDrawer() {
             >
               Proceed to Checkout →
             </button>
-            <div style="text-align: center; margin-top: 10px; font-size: 12px; color: #7e7e7d;">
-              🔒 Instant digital download • Perpetual license
+            <div style="display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 10px; font-size: 12px; color: #7e7e7d;">
+              ${Icons.lock(12, '#7e7e7d')}
+              <span>Instant digital download • Perpetual license</span>
             </div>
           </div>
         ` : ''}

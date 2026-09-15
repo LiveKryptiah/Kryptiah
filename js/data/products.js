@@ -7,6 +7,8 @@
  * - Inter typography & semantic marker colors
  */
 
+import { Icons } from '../components/Icons.js';
+
 export const SECTION_CATEGORIES = [
   { id: 'all', name: 'All Sections', count: 16, icon: 'grid', desc: 'Complete inventory of production sections' },
   { id: 'heroes', name: 'Hero Sections', count: 4, icon: 'layout', desc: 'Display typography, mascot clusters, and lead captures' },
@@ -57,8 +59,8 @@ export const SECTIONS_DATA = [
           <a href="#/mixer" style="background: #f6f4ef; color: #121212; padding: 10px 22px; border-radius: 32px; font-size: 14px; font-weight: 500; text-decoration: none; border: 1px solid #f2f0ed;">Watch Demo</a>
         </div>
         <div style="margin-top: 24px; font-size: 13px; color: #7e7e7d; display: flex; justify-content: center; gap: 20px;">
-          <span>✓ Zero setup required</span>
-          <span>✓ MIT Commercial License</span>
+          <span style="display: inline-flex; align-items: center; gap: 5px;">${Icons.check(14, '#00ca48')} Zero setup required</span>
+          <span style="display: inline-flex; align-items: center; gap: 5px;">${Icons.check(14, '#00ca48')} MIT Commercial License</span>
         </div>
       </div>
     `,
@@ -205,10 +207,10 @@ export function StorybookHero() {
 
 export function SplitActionHero() {
   const actions = [
-    { icon: '↑', color: '#0086fc', label: 'Send Assets', helper: 'Instant zero-fee transfer', badge: 'Active' },
-    { icon: '⇄', color: '#9f4fff', label: 'Swap & Bridge', helper: 'Lowest slippage routing', badge: '0.02s' },
-    { icon: '↓', color: '#00c978', label: 'Receive & Stake', helper: '4.8% APY compounding', badge: '+4.8%' },
-    { icon: '★', color: '#ff58ae', label: 'Collectibles', helper: 'Verified on-chain vault', badge: 'New' },
+    { icon: 'arrowUp', color: '#0086fc', label: 'Send Assets', helper: 'Instant zero-fee transfer', badge: 'Active' },
+    { icon: 'arrowSwap', color: '#9f4fff', label: 'Swap & Bridge', helper: 'Lowest slippage routing', badge: '0.02s' },
+    { icon: 'arrowDown', color: '#00c978', label: 'Receive & Stake', helper: '4.8% APY compounding', badge: '+4.8%' },
+    { icon: 'sparkle', color: '#ff58ae', label: 'Collectibles', helper: 'Verified on-chain vault', badge: 'New' },
   ];
 
   return (
@@ -309,21 +311,27 @@ export function SplitActionHero() {
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px;">
           <!-- Card 1 -->
           <div style="background: #ffffff; border-radius: 10px; padding: 24px; box-shadow: inset 0 0 0 1px #f2f0ed;">
-            <div style="display: inline-block; width: 32px; height: 32px; border-radius: 50%; background: #ffcd6c; display: flex; align-items: center; justify-content: center; font-size: 16px; margin-bottom: 16px;">✦</div>
+            <div style="display: inline-flex; width: 32px; height: 32px; border-radius: 50%; background: #ffcd6c; align-items: center; justify-content: center; margin-bottom: 16px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#343433" stroke="#343433" stroke-width="1.5"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>
+            </div>
             <h3 style="font-size: 18px; font-weight: 600; color: #343433; margin-bottom: 8px;">Instant Sync</h3>
             <p style="font-size: 14px; color: #474645; line-height: 1.45; margin-bottom: 14px;">Zero-latency local-first state engine synced to cloud.</p>
             <a href="#/sections" style="color: #ff3e00; font-size: 13px; font-weight: 500; text-decoration: underline;">Watch the demo</a>
           </div>
           <!-- Card 2 -->
           <div style="background: #ffffff; border-radius: 10px; padding: 24px; box-shadow: inset 0 0 0 1px #f2f0ed;">
-            <div style="display: inline-block; width: 32px; height: 32px; border-radius: 50%; background: #64c6ff; display: flex; align-items: center; justify-content: center; font-size: 16px; margin-bottom: 16px;">🛡</div>
+            <div style="display: inline-flex; width: 32px; height: 32px; border-radius: 50%; background: #64c6ff; align-items: center; justify-content: center; margin-bottom: 16px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#121212" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
             <h3 style="font-size: 18px; font-weight: 600; color: #343433; margin-bottom: 8px;">Zero-Leak Vault</h3>
             <p style="font-size: 14px; color: #474645; line-height: 1.45; margin-bottom: 14px;">Hardware enclave encryption guarding your keys.</p>
             <a href="#/sections" style="color: #ff3e00; font-size: 13px; font-weight: 500; text-decoration: underline;">Read security whitepaper</a>
           </div>
           <!-- Card 3 -->
           <div style="background: #ffffff; border-radius: 10px; padding: 24px; box-shadow: inset 0 0 0 1px #f2f0ed;">
-            <div style="display: inline-block; width: 32px; height: 32px; border-radius: 50%; background: #00c978; display: flex; align-items: center; justify-content: center; font-size: 16px; margin-bottom: 16px;">⚡</div>
+            <div style="display: inline-flex; width: 32px; height: 32px; border-radius: 50%; background: #00c978; align-items: center; justify-content: center; margin-bottom: 16px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#121212" stroke="#121212" stroke-width="1"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
             <h3 style="font-size: 18px; font-weight: 600; color: #343433; margin-bottom: 8px;">0.00ms CLS</h3>
             <p style="font-size: 14px; color: #474645; line-height: 1.45; margin-bottom: 14px;">Optimized asset loading with zero cumulative layout shifts.</p>
             <a href="#/sections" style="color: #ff3e00; font-size: 13px; font-weight: 500; text-decoration: underline;">View benchmark tests</a>
@@ -335,10 +343,10 @@ export function SplitActionHero() {
 
 export function BentoFeatureMatrix() {
   const cards = [
-    { icon: '✦', color: '#ffcd6c', title: 'Instant Sync', desc: 'Zero-latency local-first state engine synced smoothly to cloud.', link: 'Watch the demo' },
-    { icon: '🛡', color: '#64c6ff', title: 'Zero-Leak Vault', desc: 'Hardware enclave encryption guarding secret operational keys.', link: 'Read security paper' },
-    { icon: '⚡', color: '#00c978', title: '0.00ms CLS', desc: 'Optimized asset pipeline guaranteeing zero cumulative layout shifts.', link: 'View benchmark tests' },
-    { icon: '♥', color: '#ff58ae', title: 'Delight First', desc: 'Handcrafted micro-animations and cheerful marker mascot accents.', link: 'Explore mascot library' }
+    { icon: 'sparkle', color: '#ffcd6c', title: 'Instant Sync', desc: 'Zero-latency local-first state engine synced smoothly to cloud.', link: 'Watch the demo' },
+    { icon: 'shield', color: '#64c6ff', title: 'Zero-Leak Vault', desc: 'Hardware enclave encryption guarding secret operational keys.', link: 'Read security paper' },
+    { icon: 'lightning', color: '#00c978', title: '0.00ms CLS', desc: 'Optimized asset pipeline guaranteeing zero cumulative layout shifts.', link: 'View benchmark tests' },
+    { icon: 'heart', color: '#ff58ae', title: 'Delight First', desc: 'Handcrafted micro-animations and cheerful marker mascot accents.', link: 'Explore mascot library' }
   ];
 
   return (
@@ -424,9 +432,9 @@ export function BentoFeatureMatrix() {
             <div style="font-size: 16px; font-weight: 600; color: #343433; margin-bottom: 4px;">Single Section</div>
             <div style="font-size: 28px; font-weight: 700; color: #121212; margin-bottom: 12px;">$29 <span style="font-size: 12px; font-weight: 400; color: #7e7e7d;">one-time</span></div>
             <ul style="font-size: 13px; color: #474645; line-height: 1.8; margin-bottom: 20px; list-style: none; padding: 0;">
-              <li>✓ Full React 19 JSX code</li>
-              <li>✓ Tailwind CSS v4 styling</li>
-              <li>✓ Perpetual commercial license</li>
+              <li style="display: flex; align-items: center; gap: 6px;">${Icons.check(13, '#00ca48')} Full React 19 JSX code</li>
+              <li style="display: flex; align-items: center; gap: 6px;">${Icons.check(13, '#00ca48')} Tailwind CSS v4 styling</li>
+              <li style="display: flex; align-items: center; gap: 6px;">${Icons.check(13, '#00ca48')} Perpetual commercial license</li>
             </ul>
             <a href="#/cart" style="margin-top: auto; background: #f6f4ef; color: #121212; padding: 10px; border-radius: 32px; text-align: center; font-size: 13px; font-weight: 600; text-decoration: none;">Choose Single</a>
           </div>
@@ -436,10 +444,10 @@ export function BentoFeatureMatrix() {
             <div style="font-size: 16px; font-weight: 600; color: #343433; margin-bottom: 4px;">All-Access Pass</div>
             <div style="font-size: 28px; font-weight: 700; color: #121212; margin-bottom: 12px;">$99 <span style="font-size: 12px; font-weight: 400; color: #7e7e7d;">lifetime</span></div>
             <ul style="font-size: 13px; color: #474645; line-height: 1.8; margin-bottom: 20px; list-style: none; padding: 0;">
-              <li>✓ All 16+ website sections</li>
-              <li>✓ Free lifetime updates</li>
-              <li>✓ Complete Figma file included</li>
-              <li>✓ Section Mixer Builder tool</li>
+              <li style="display: flex; align-items: center; gap: 6px;">${Icons.check(13, '#00ca48')} All 16+ website sections</li>
+              <li style="display: flex; align-items: center; gap: 6px;">${Icons.check(13, '#00ca48')} Free lifetime updates</li>
+              <li style="display: flex; align-items: center; gap: 6px;">${Icons.check(13, '#00ca48')} Complete Figma file included</li>
+              <li style="display: flex; align-items: center; gap: 6px;">${Icons.check(13, '#00ca48')} Section Mixer Builder tool</li>
             </ul>
             <a href="#/cart" style="margin-top: auto; background: #121212; color: #ffffff; padding: 10px; border-radius: 32px; text-align: center; font-size: 13px; font-weight: 600; text-decoration: none;">Get Lifetime Pass</a>
           </div>
@@ -513,7 +521,7 @@ export function FamilyPricingTable() {
                   <div style="font-size: 12px; color: #7e7e7d;">@rrhoover</div>
                 </div>
               </div>
-              <span style="font-size: 14px; color: #7e7e7d;">𝕏</span>
+              ${Icons.xTwitter(14, '#7e7e7d')}
             </div>
             <p style="font-size: 14px; color: #474645; line-height: 1.45;">
               "The most delightful web components I have integrated in years. Hairline borders change everything."
@@ -529,7 +537,7 @@ export function FamilyPricingTable() {
                   <div style="font-size: 12px; color: #7e7e7d;">@karrisaarinen</div>
                 </div>
               </div>
-              <span style="font-size: 14px; color: #7e7e7d;">𝕏</span>
+              ${Icons.xTwitter(14, '#7e7e7d')}
             </div>
             <p style="font-size: 14px; color: #474645; line-height: 1.45;">
               "Clean restraint on the chrome, let the cartoon illustrations do the emotional storytelling."
@@ -576,7 +584,7 @@ export function FriendsOfFamilyTweets() {
                     <div className="text-xs text-[#7e7e7d]">{t.handle}</div>
                   </div>
                 </div>
-                <span className="text-neutral-400 font-bold text-sm">𝕏</span>
+                <span className="text-neutral-400 font-bold text-sm">X</span>
               </div>
               <p className="text-[#474645] text-[15px] leading-relaxed">
                 "{t.text}"
@@ -623,7 +631,9 @@ export function FriendsOfFamilyTweets() {
       <div style="background: #fbfaf9; padding: 36px 20px; font-family: 'Inter', sans-serif;">
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; align-items: center;">
           <div style="background: #ffffff; border-radius: 10px; padding: 24px; box-shadow: inset 0 0 0 1px #f2f0ed; text-align: center;">
-            <div style="width: 60px; height: 60px; border-radius: 50%; background: #00c978; margin: 0 auto 16px auto; display: flex; align-items: center; justify-content: center; font-size: 24px;">🌱</div>
+            <div style="width: 60px; height: 60px; border-radius: 50%; background: #00c978; margin: 0 auto 16px auto; display: flex; align-items: center; justify-content: center; color: #ffffff;">
+              ${Icons.sprout(28, '#ffffff')}
+            </div>
             <div style="font-size: 16px; font-weight: 600; color: #121212; margin-bottom: 6px;">Growing Ecosystem</div>
             <div style="font-size: 13px; color: #474645;">All components maintain strict token discipline across updates.</div>
           </div>

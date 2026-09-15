@@ -20,6 +20,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
 }
 
 body {
@@ -62,6 +63,41 @@ input, textarea, select {
   .container {
     padding-left: 16px;
     padding-right: 16px;
+  }
+}
+
+/* --- Fullscreen Per-Section Sizing --- */
+.section-fullscreen-hero {
+  min-height: calc(100vh - 64px);
+  min-height: calc(100dvh - 64px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 48px;
+  padding-bottom: 48px;
+  box-sizing: border-box;
+  position: relative;
+  scroll-snap-align: start;
+}
+
+.section-fullscreen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 64px;
+  padding-bottom: 64px;
+  box-sizing: border-box;
+  position: relative;
+  scroll-snap-align: start;
+}
+
+@media (max-height: 760px) {
+  .section-fullscreen {
+    min-height: auto;
+    padding-top: 72px;
+    padding-bottom: 72px;
   }
 }
 

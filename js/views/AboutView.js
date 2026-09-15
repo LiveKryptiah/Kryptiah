@@ -7,6 +7,8 @@
  * - Interactive Token swatch board
  */
 
+import { Icons } from '../components/Icons.js';
+
 export function renderAboutView() {
   const familyTokens = [
     { name: 'Cream Canvas', hex: '#fbfaf9', role: 'Page background, nav surface — paper feel' },
@@ -28,7 +30,7 @@ export function renderAboutView() {
   ];
 
   return `
-    <div class="about-page" style="padding: 48px 0 80px 0;">
+    <div class="about-page" style="padding: 48px 0 80px 0; min-height: calc(100vh - 64px);">
       <div class="container" style="max-width: 900px;">
         <!-- Manifesto Header -->
         <div style="margin-bottom: 48px;">
@@ -49,8 +51,8 @@ export function renderAboutView() {
         <!-- The 3 Core Pillars -->
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-bottom: 56px;">
           <div class="card-hairline">
-            <div style="width: 40px; height: 40px; border-radius: 50%; background: #ffcd6c; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 16px;">
-              📄
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: #ffcd6c; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+              ${Icons.code(20, '#121212')}
             </div>
             <h3 style="font-size: 18px; font-weight: 600; color: #121212; margin-bottom: 8px;">Pressed Into Paper</h3>
             <p style="font-size: 14px; color: #474645; line-height: 1.5;">
@@ -59,8 +61,8 @@ export function renderAboutView() {
           </div>
 
           <div class="card-hairline">
-            <div style="width: 40px; height: 40px; border-radius: 50%; background: #64c6ff; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 16px;">
-              🎨
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: #64c6ff; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+              ${Icons.palette(20, '#121212')}
             </div>
             <h3 style="font-size: 18px; font-weight: 600; color: #121212; margin-bottom: 8px;">Chromatic Markers</h3>
             <p style="font-size: 14px; color: #474645; line-height: 1.5;">
@@ -69,8 +71,8 @@ export function renderAboutView() {
           </div>
 
           <div class="card-hairline">
-            <div style="width: 40px; height: 40px; border-radius: 50%; background: #00c978; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 16px;">
-              📐
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: #00c978; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+              ${Icons.ruler(20, '#121212')}
             </div>
             <h3 style="font-size: 18px; font-weight: 600; color: #121212; margin-bottom: 8px;">Calm Inter Utility</h3>
             <p style="font-size: 14px; color: #474645; line-height: 1.5;">

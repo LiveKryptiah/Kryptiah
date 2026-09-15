@@ -5,6 +5,7 @@
  */
 
 import { state } from '../state.js';
+import { Icons } from './Icons.js';
 
 export function renderNavbar(currentPath = '') {
   const cartCount = state.cart.length;
@@ -24,7 +25,7 @@ export function renderNavbar(currentPath = '') {
           <a href="#/" class="logo-link" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
             <!-- Cheerful mini mascot badge -->
             <div style="width: 34px; height: 34px; background: #64c6ff; border-radius: 10px; display: flex; align-items: center; justify-content: center; border: 1.5px solid #343433; box-shadow: 1px 1px 0px #343433;">
-              <span style="font-size: 18px; line-height: 1;">✦</span>
+              ${Icons.sparkle(18, '#ffffff')}
             </div>
             <span style="font-size: 20px; font-weight: 600; letter-spacing: -0.02em; color: #121212;">
               Azarel
@@ -61,7 +62,8 @@ export function renderNavbar(currentPath = '') {
               style="display: flex; align-items: center; gap: 6px; background: #f2f0ed; padding: 8px 14px; border-radius: 32px; font-size: 13px; font-weight: 500; color: #343433; border: none; cursor: pointer;"
               aria-label="View Cart"
             >
-              <span>🛍️ Cart</span>
+              ${Icons.cart(15, '#343433')}
+              <span>Cart</span>
               ${cartCount > 0 ? `
                 <span style="background: #ff3e00; color: white; font-size: 11px; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;">
                   ${cartCount}

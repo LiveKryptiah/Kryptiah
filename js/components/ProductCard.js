@@ -11,6 +11,7 @@
  */
 
 import { state } from '../state.js';
+import { Icons } from './Icons.js';
 
 export function renderProductCard(section) {
   const isFavorited = state.isFavorited(section.id);
@@ -37,10 +38,10 @@ export function renderProductCard(section) {
           onclick="window.azarelToggleFav('${section.id}')" 
           class="btn-fav" 
           title="Save section"
-          style="background: transparent; border: none; font-size: 18px; cursor: pointer; color: ${isFavorited ? '#ff3e00' : '#7e7e7d'};"
+          style="background: transparent; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 4px;"
           aria-label="Save Section"
         >
-          ${isFavorited ? '♥' : '♡'}
+          ${Icons.heart(18, isFavorited, isFavorited ? '#ff3e00' : '#7e7e7d')}
         </button>
       </div>
 
@@ -66,7 +67,10 @@ export function renderProductCard(section) {
           ${section.previewHtml}
         </div>
         <div class="preview-hover-overlay">
-          <span>🔍 Expand Live Viewport &amp; Code</span>
+          <span style="display: flex; align-items: center; gap: 6px;">
+            ${Icons.search(14, '#ffffff')}
+            <span>Expand Viewport &amp; Code</span>
+          </span>
         </div>
       </div>
 
@@ -87,10 +91,10 @@ export function renderProductCard(section) {
             type="button" 
             onclick="window.azarelToggleMixer('${section.id}')" 
             class="btn-sand-pill" 
-            style="padding: 6px 12px; font-size: 12px;"
+            style="padding: 6px 12px; font-size: 12px; display: inline-flex; align-items: center; gap: 4px;"
             title="${inMixer ? 'Remove from Page Stack' : 'Stack into Live Page Preview'}"
           >
-            ${inMixer ? '✓ In Stack' : '+ Stack'}
+            ${inMixer ? `${Icons.check(12, '#00ca48')} <span>In Stack</span>` : '<span>+ Stack</span>'}
           </button>
 
           <!-- Add to Cart or Download Free -->

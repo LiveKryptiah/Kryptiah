@@ -6,6 +6,7 @@
 import { SECTION_CATEGORIES, FRAMEWORKS } from '../data/products.js';
 import { renderProductCard } from '../components/ProductCard.js';
 import { state } from '../state.js';
+import { Icons } from '../components/Icons.js';
 
 export function renderMarketplaceView() {
   const filteredSections = state.getFilteredSections();
@@ -15,7 +16,7 @@ export function renderMarketplaceView() {
   const currentSort = state.sortBy;
 
   return `
-    <div class="marketplace-page" style="padding: 48px 0 80px 0;">
+    <div class="marketplace-page" style="padding: 48px 0 80px 0; min-height: calc(100vh - 64px);">
       <div class="container">
         <!-- Marketplace Title Area -->
         <div style="margin-bottom: 36px; text-align: center;">
@@ -34,21 +35,24 @@ export function renderMarketplaceView() {
         <div style="background: #ffffff; border-radius: 12px; padding: 20px; box-shadow: inset 0 0 0 1px #f2f0ed; margin-bottom: 32px;">
           <!-- Top Row: Search Input & Dropdowns -->
           <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px;">
-            <div style="flex: 1; min-width: 240px; position: relative;">
+            <div style="flex: 1; min-width: 240px; position: relative; display: flex; align-items: center;">
+              <div style="position: absolute; left: 14px; color: #7e7e7d; display: flex; align-items: center; pointer-events: none;">
+                ${Icons.search(16, '#7e7e7d')}
+              </div>
               <input 
                 type="text" 
                 placeholder="Search sections by name, keyword, or tag..." 
                 value="${state.searchQuery}"
                 oninput="window.azarelSearch(this.value)"
-                style="width: 100%; padding: 10px 16px; border-radius: 32px; border: 1px solid #e5d5c3; background: #fbfaf9; color: #121212; font-size: 14px; outline: none;"
+                style="width: 100%; padding: 10px 16px 10px 40px; border-radius: 32px; border: 1px solid #e5d5c3; background: #fbfaf9; color: #121212; font-size: 14px; outline: none;"
               />
               ${state.searchQuery ? `
                 <button 
                   type="button" 
                   onclick="window.azarelSearch('')" 
-                  style="position: absolute; right: 12px; top: 10px; color: #7e7e7d; font-size: 14px;"
+                  style="position: absolute; right: 12px; top: 10px; color: #7e7e7d; font-size: 14px; display: flex; align-items: center;"
                 >
-                  ✕
+                  ${Icons.close(14, '#7e7e7d')}
                 </button>
               ` : ''}
             </div>
@@ -132,7 +136,9 @@ export function renderMarketplaceView() {
         <!-- Sections Grid -->
         ${filteredSections.length === 0 ? `
           <div style="background: #ffffff; border-radius: 12px; padding: 60px 24px; text-align: center; box-shadow: inset 0 0 0 1px #f2f0ed;">
-            <div style="font-size: 40px; margin-bottom: 16px;">🔍</div>
+            <div style="display: flex; justify-content: center; margin-bottom: 16px; color: #a1a1aa;">
+              ${Icons.search(44, '#a1a1aa')}
+            </div>
             <h3 style="font-size: 20px; font-weight: 600; color: #121212; margin-bottom: 8px;">No website sections matched your criteria</h3>
             <p style="font-size: 14px; color: #474645; margin-bottom: 20px;">Try clearing your search terms or filters.</p>
             <button type="button" onclick="window.azarelResetFilters()" class="btn-dark-pill">

@@ -1,10 +1,12 @@
 /**
  * ProductDetailView Component — Family Style Reference
  * In-depth section viewer with responsive viewport simulator, code tabs, and license checkout.
+ * Clean SVG icons (zero emojis).
  */
 
 import { SECTIONS_DATA } from '../data/products.js';
 import { state } from '../state.js';
+import { Icons } from '../components/Icons.js';
 
 export function renderProductDetailView(slug) {
   const section = SECTIONS_DATA.find(s => s.slug === slug || s.id === slug) || SECTIONS_DATA[0];
@@ -17,7 +19,7 @@ export function renderProductDetailView(slug) {
   if (activeTab === 'html') currentCode = section.codeHtml;
 
   return `
-    <div class="product-detail-page" style="padding: 40px 0 80px 0;">
+    <div class="product-detail-page" style="padding: 40px 0 80px 0; min-height: calc(100vh - 64px);">
       <div class="container">
         <!-- Breadcrumb & Back -->
         <div style="margin-bottom: 24px; display: flex; align-items: center; gap: 8px; font-size: 13px; color: #7e7e7d;">
@@ -47,9 +49,9 @@ export function renderProductDetailView(slug) {
               type="button" 
               onclick="window.azarelToggleMixer('${section.id}')" 
               class="btn-sand-pill"
-              style="padding: 10px 18px; font-size: 14px;"
+              style="padding: 10px 18px; font-size: 14px; display: inline-flex; align-items: center; gap: 6px;"
             >
-              ${inMixer ? '✓ In Page Mixer' : '+ Add to Page Mixer'}
+              ${inMixer ? `${Icons.check(13, '#00ca48')} <span>In Page Mixer</span>` : '<span>+ Add to Page Mixer</span>'}
             </button>
             <button 
               type="button" 
@@ -73,22 +75,28 @@ export function renderProductDetailView(slug) {
                 type="button" 
                 onclick="window.azarelSetDevice('desktop')" 
                 class="device-btn ${activeDevice === 'desktop' ? 'active' : ''}"
+                style="display: inline-flex; align-items: center; gap: 6px;"
               >
-                🖥 Desktop (1200px)
+                ${Icons.desktop(14)}
+                <span>Desktop (1200px)</span>
               </button>
               <button 
                 type="button" 
                 onclick="window.azarelSetDevice('tablet')" 
                 class="device-btn ${activeDevice === 'tablet' ? 'active' : ''}"
+                style="display: inline-flex; align-items: center; gap: 6px;"
               >
-                📱 Tablet (768px)
+                ${Icons.tablet(14)}
+                <span>Tablet (768px)</span>
               </button>
               <button 
                 type="button" 
                 onclick="window.azarelSetDevice('mobile')" 
                 class="device-btn ${activeDevice === 'mobile' ? 'active' : ''}"
+                style="display: inline-flex; align-items: center; gap: 6px;"
               >
-                📲 Mobile (375px)
+                ${Icons.mobile(14)}
+                <span>Mobile (375px)</span>
               </button>
             </div>
           </div>
@@ -108,22 +116,28 @@ export function renderProductDetailView(slug) {
                 type="button" 
                 onclick="window.azarelSetCodeTab('react')" 
                 class="code-tab ${activeTab === 'react' ? 'active' : ''}"
+                style="display: inline-flex; align-items: center; gap: 6px;"
               >
-                ⚛ React 19 JSX
+                ${Icons.react(14, activeTab === 'react' ? '#0086fc' : '#7e7e7d')}
+                <span>React 19 JSX</span>
               </button>
               <button 
                 type="button" 
                 onclick="window.azarelSetCodeTab('tailwind')" 
                 class="code-tab ${activeTab === 'tailwind' ? 'active' : ''}"
+                style="display: inline-flex; align-items: center; gap: 6px;"
               >
-                🌊 Tailwind CSS v4
+                ${Icons.tailwind(14, activeTab === 'tailwind' ? '#00b2ff' : '#7e7e7d')}
+                <span>Tailwind CSS v4</span>
               </button>
               <button 
                 type="button" 
                 onclick="window.azarelSetCodeTab('html')" 
                 class="code-tab ${activeTab === 'html' ? 'active' : ''}"
+                style="display: inline-flex; align-items: center; gap: 6px;"
               >
-                📄 Vanilla HTML/CSS
+                ${Icons.code(14, activeTab === 'html' ? '#121212' : '#7e7e7d')}
+                <span>Vanilla HTML/CSS</span>
               </button>
             </div>
 
@@ -131,9 +145,10 @@ export function renderProductDetailView(slug) {
               type="button" 
               onclick="navigator.clipboard.writeText(document.getElementById('detail-code-box').innerText); window.dispatchEvent(new CustomEvent('azarel:toast', { detail: { message: 'Code copied to clipboard!' } }))" 
               class="btn-sand-pill"
-              style="padding: 6px 14px; font-size: 13px;"
+              style="padding: 6px 14px; font-size: 13px; display: inline-flex; align-items: center; gap: 6px;"
             >
-              📋 Copy Code
+              ${Icons.copy(14, '#343433')}
+              <span>Copy Code</span>
             </button>
           </div>
 
