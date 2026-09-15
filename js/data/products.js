@@ -10,13 +10,14 @@
 import { Icons } from '../components/Icons.js';
 
 export const SECTION_CATEGORIES = [
-  { id: 'all', name: 'All Sections', count: 16, icon: 'grid', desc: 'Complete inventory of production sections' },
+  { id: 'all', name: 'All Sections', count: 19, icon: 'grid', desc: 'Complete inventory of production sections' },
   { id: 'heroes', name: 'Hero Sections', count: 4, icon: 'layout', desc: 'Display typography, mascot clusters, and lead captures' },
   { id: 'bento', name: 'Bento & Metrics', count: 3, icon: 'layers', desc: 'Multi-column bento grids and metric telemetry blocks' },
   { id: 'features', name: 'Feature Showcases', count: 3, icon: 'zap', desc: 'Alternating story spreads and interactive action cards' },
-  { id: 'pricing', name: 'Pricing Tables', count: 2, icon: 'tag', desc: 'Transparent tier matrices and annual/monthly toggles' },
+  { id: 'pricing', name: 'Pricing Tables', count: 3, icon: 'tag', desc: 'Transparent tier matrices and annual/monthly toggles' },
   { id: 'social-proof', name: 'Social Proof', count: 2, icon: 'message-square', desc: 'Horizontally scrolling tweet cards & partner strips' },
-  { id: 'ctas', name: 'CTAs & Forms', count: 2, icon: 'send', desc: 'High-converting banners and email capture blocks' }
+  { id: 'ctas', name: 'CTAs & Forms', count: 2, icon: 'send', desc: 'High-converting banners and email capture blocks' },
+  { id: 'footers', name: 'Footers & Nav', count: 2, icon: 'layout', desc: 'Multi-column site maps, newsletter forms, and status bars' }
 ];
 
 export const FRAMEWORKS = ['All', 'React 19', 'Tailwind v4', 'HTML/CSS', 'Figma'];
@@ -730,6 +731,231 @@ export function LeadCaptureCTA() {
     included: ['React JSX Component', 'Tailwind Classes', 'HTML Template']
   }
 ];
+
+  // --------------------------------------------------------------------------
+  // FROSTED GLASS PRICING SECTION (Reverse-Engineered Screenshot)
+  // --------------------------------------------------------------------------
+  {
+    id: 'sec-pricing-02',
+    slug: 'frosted-glass-midnight-pricing',
+    name: 'Frosted Glass Midnight Pricing Matrix',
+    category: 'pricing',
+    categoryLabel: 'Pricing Tables',
+    description: 'A dark luxury pricing section featuring an oversized background display watermark, 3 frosted glass cards with 24px backdrop-blur, subtle hairline dividers, circular checkmarks, and a high-contrast inverted CTA on the featured Professional tier.',
+    price: 39,
+    isFree: false,
+    framework: 'React 19 / Tailwind v4',
+    style: 'Midnight Frosted Glass',
+    tags: ['Pricing', 'Glassmorphism', 'Dark Mode', 'SaaS', 'Monochrome'],
+    featured: true,
+    popular: true,
+    rating: 5.0,
+    reviewCount: 88,
+    badge: 'Trending Design',
+    previewHtml: `
+      <div style="background: #000000; padding: 48px 24px; border-radius: 12px; position: relative; overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #ffffff;">
+        <!-- Background Typographic Watermark -->
+        <div style="position: absolute; top: 12px; left: 50%; transform: translateX(-50%); font-size: 88px; font-weight: 800; color: #ffffff; letter-spacing: -0.04em; pointer-events: none; z-index: 1; opacity: 0.95; white-space: nowrap;">
+          Pricing
+        </div>
+
+        <!-- 3 Frosted Glass Cards Grid -->
+        <div style="position: relative; z-index: 2; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; max-width: 960px; margin: 36px auto 28px auto;">
+          <!-- Card 1: Basic / Free -->
+          <div style="background: rgba(18, 18, 18, 0.72); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 18px; padding: 24px; display: flex; flex-direction: column;">
+            <div style="font-size: 13px; font-weight: 500; color: rgba(255, 255, 255, 0.7); margin-bottom: 4px;">Basic</div>
+            <div style="font-size: 32px; font-weight: 700; color: #ffffff; margin-bottom: 16px;">Free</div>
+            <div style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 16px; margin-bottom: 24px; display: flex; flex-direction: column; gap: 12px; font-size: 13px; color: #a1a1aa;">
+              <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; font-size: 10px; color: #ffffff;">✓</span> 1,000 Members</div>
+              <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; font-size: 10px; color: #ffffff;">✓</span> Social Logins</div>
+              <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; font-size: 10px; color: #ffffff;">✓</span> Stripe Payments</div>
+              <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; font-size: 10px; color: #ffffff;">✓</span> Custom SSO</div>
+              <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; font-size: 10px; color: #ffffff;">✓</span> Branded Emails</div>
+            </div>
+            <button type="button" style="margin-top: auto; width: 100%; background: #0a0a0a; border: 1px solid rgba(255,255,255,0.14); color: #ffffff; padding: 10px 16px; border-radius: 9999px; font-size: 13px; font-weight: 600; cursor: pointer;">Get Started</button>
+          </div>
+
+          <!-- Card 2: Professional / $88/m (Featured) -->
+          <div style="background: rgba(18, 18, 18, 0.72); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 18px; padding: 24px; display: flex; flex-direction: column;">
+            <div style="font-size: 13px; font-weight: 500; color: rgba(255, 255, 255, 0.7); margin-bottom: 4px;">Professional</div>
+            <div style="font-size: 32px; font-weight: 700; color: #ffffff; margin-bottom: 16px;">$88<span style="font-size: 16px; font-weight: 500; color: #a1a1aa;">/m</span></div>
+            <div style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 16px; margin-bottom: 24px; display: flex; flex-direction: column; gap: 12px; font-size: 13px; color: #a1a1aa;">
+              <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; font-size: 10px; color: #ffffff;">✓</span> 5,000 Members</div>
+              <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; font-size: 10px; color: #ffffff;">✓</span> Social Logins</div>
+              <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; font-size: 10px; color: #ffffff;">✓</span> Stripe Payments</div>
+              <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; font-size: 10px; color: #ffffff;">✓</span> Custom SSO</div>
+              <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; font-size: 10px; color: #ffffff;">✓</span> Branded Emails</div>
+            </div>
+            <button type="button" style="margin-top: auto; width: 100%; background: #ffffff; border: none; color: #000000; padding: 10px 16px; border-radius: 9999px; font-size: 13px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 12px rgba(255,255,255,0.15);">Get Started</button>
+          </div>
+
+          <!-- Card 3: Business / $108/m -->
+          <div style="background: rgba(18, 18, 18, 0.72); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 18px; padding: 24px; display: flex; flex-direction: column;">
+            <div style="font-size: 13px; font-weight: 500; color: rgba(255, 255, 255, 0.7); margin-bottom: 4px;">Business</div>
+            <div style="font-size: 32px; font-weight: 700; color: #ffffff; margin-bottom: 16px;">$108<span style="font-size: 16px; font-weight: 500; color: #a1a1aa;">/m</span></div>
+            <div style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 16px; margin-bottom: 24px; display: flex; flex-direction: column; gap: 12px; font-size: 13px; color: #a1a1aa;">
+              <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; font-size: 10px; color: #ffffff;">✓</span> 10,000+ Members</div>
+              <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; font-size: 10px; color: #ffffff;">✓</span> Social Logins</div>
+              <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; font-size: 10px; color: #ffffff;">✓</span> Stripe Payments</div>
+              <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; font-size: 10px; color: #ffffff;">✓</span> Custom SSO</div>
+              <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; font-size: 10px; color: #ffffff;">✓</span> Branded Emails</div>
+            </div>
+            <button type="button" style="margin-top: auto; width: 100%; background: #0a0a0a; border: 1px solid rgba(255,255,255,0.14); color: #ffffff; padding: 10px 16px; border-radius: 9999px; font-size: 13px; font-weight: 600; cursor: pointer;">Get Started</button>
+          </div>
+        </div>
+
+        <!-- Bottom Utility Bar (Toggle & Attribution) -->
+        <div style="position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: center; max-width: 960px; margin: 0 auto; padding-top: 10px;">
+          <!-- Monthly Toggle -->
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 34px; height: 18px; border-radius: 9999px; background: #000000; border: 1.5px solid #ffffff; position: relative; display: inline-block;">
+              <span style="position: absolute; top: 2px; left: 2px; width: 11px; height: 11px; border-radius: 50%; background: #ffffff;"></span>
+            </div>
+            <span style="font-size: 12px; color: #71717a;">Billed Monthly</span>
+          </div>
+
+          <!-- Attribution Badge -->
+          <div style="background: #ffffff; color: #000000; padding: 6px 14px; border-radius: 9999px; font-size: 11px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;">
+            <span>presented by</span>
+            <span style="display: inline-block; width: 14px; height: 14px; background: linear-gradient(135deg, #02b8cc, #6366f1); border-radius: 3px;"></span>
+          </div>
+        </div>
+      </div>
+    `,
+    features: ['Oversized background typographic refraction', '24px backdrop-blur glassmorphism', 'Inverted featured tier CTA button', 'Monthly/annual billing switch'],
+    included: ['Frosted Glass Specs', 'Tailwind Backdrop Utility Classes', 'Responsive Layout Model']
+  },
+
+  // --------------------------------------------------------------------------
+  // FOOTER SECTIONS
+  // --------------------------------------------------------------------------
+  {
+    id: 'sec-footer-01',
+    slug: 'storybook-multi-column-footer',
+    name: 'Storybook Multi-Column Sitemap & Newsletter Footer',
+    category: 'footers',
+    categoryLabel: 'Footers & Nav',
+    description: 'A warm cream parchment footer spread with 4 structured columns: brand identification, categorized section links, licensing & developer tools, and an integrated newsletter subscriber bar.',
+    price: 0,
+    isFree: true,
+    framework: 'React 19 / Tailwind v4',
+    style: 'Family Parchment',
+    tags: ['Footer', 'Sitemap', 'Newsletter', 'Freebie', 'Storybook'],
+    featured: true,
+    popular: true,
+    rating: 4.9,
+    reviewCount: 71,
+    badge: 'Standard Footer',
+    previewHtml: `
+      <div style="background: #fbfaf9; padding: 48px 32px 28px 32px; border-radius: 12px; box-shadow: inset 0 0 0 1px #f2f0ed; font-family: 'Inter', sans-serif;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 32px; margin-bottom: 40px;">
+          <div>
+            <div style="font-size: 18px; font-weight: 700; color: #121212; margin-bottom: 8px;">Azarel Sections</div>
+            <p style="font-size: 13px; color: #474645; line-height: 1.5; margin: 0 0 12px 0;">Storybook spread on cream parchment. Defined by hairline borders rather than heavy shadows.</p>
+            <div style="font-size: 12px; color: #7e7e7d;">© 2026 Azarel. Perpetual license.</div>
+          </div>
+          <div>
+            <div style="font-size: 12px; font-weight: 700; color: #121212; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Website Sections</div>
+            <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: #474645;">
+              <span>Hero Spreads</span>
+              <span>Bento Matrices</span>
+              <span>Pricing Tables</span>
+              <span>Social Proof</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-size: 12px; font-weight: 700; color: #121212; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Developer Tools</div>
+            <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: #474645;">
+              <span>Page Stack Mixer</span>
+              <span>Linear Tokens</span>
+              <span>Figma System</span>
+              <span>License Terms</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-size: 12px; font-weight: 700; color: #121212; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px;">Stay Updated</div>
+            <p style="font-size: 12px; color: #7e7e7d; margin: 0 0 10px 0;">New section drops weekly.</p>
+            <div style="display: flex; gap: 6px;">
+              <input type="email" placeholder="Your email..." style="flex: 1; padding: 7px 12px; border-radius: 9999px; border: 1px solid #e5d5c3; background: #ffffff; font-size: 12px; outline: none;" />
+              <button type="button" style="background: #121212; color: #ffffff; border: none; padding: 7px 14px; border-radius: 9999px; font-size: 12px; font-weight: 600;">Join</button>
+            </div>
+          </div>
+        </div>
+        <div style="border-top: 1px solid #f2f0ed; padding-top: 18px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #7e7e7d; flex-wrap: wrap; gap: 8px;">
+          <div>Base: #fbfaf9 • Hairline: #f2f0ed • Accent: #ff3e00</div>
+          <div>Production-ready website sections</div>
+        </div>
+      </div>
+    `,
+    features: ['4-column responsive sitemap hierarchy', 'Inline email subscriber pill', 'Family stone hairline borders', 'Mobile-friendly flex wrapping'],
+    included: ['React JSX Component', 'Tailwind Classes', 'HTML/CSS Layout']
+  },
+  {
+    id: 'sec-footer-02',
+    slug: 'midnight-precision-command-footer',
+    name: 'Midnight Precision Command Footer (Linear Style)',
+    category: 'footers',
+    categoryLabel: 'Footers & Nav',
+    description: 'Precision-machined dark footer engineered for technical products. Features Level 0 Void canvas, Level 1 Carbon container with 0.5px hairline border, live system status telemetry indicator, and Berkeley Mono metadata.',
+    price: 24,
+    isFree: false,
+    framework: 'React 19 / Tailwind v4',
+    style: 'Linear Midnight Precision',
+    tags: ['Footer', 'Dark Mode', 'Telemetry', 'Linear', 'Minimal'],
+    featured: true,
+    popular: true,
+    rating: 5.0,
+    reviewCount: 63,
+    badge: 'Midnight Series',
+    previewHtml: `
+      <div style="background: #08090a; padding: 48px 32px 28px 32px; border-radius: 12px; box-shadow: inset 0 0 0 1px #23252a; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #d0d6e0;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 32px; margin-bottom: 40px;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+              <span style="width: 14px; height: 14px; border-radius: 3px; background: #e4f222; display: inline-block;"></span>
+              <span style="font-size: 15px; font-weight: 600; color: #ffffff;">Linear Command</span>
+            </div>
+            <p style="font-size: 13px; color: #8a8f98; line-height: 1.5; margin: 0 0 14px 0;">Midnight precision instrument for engineering teams.</p>
+            <div style="display: inline-flex; align-items: center; gap: 6px; background: #161718; padding: 4px 10px; border-radius: 9999px; box-shadow: inset 0 0 0 1px #23252a; font-size: 11px; color: #27a644; font-family: ui-monospace, monospace;">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: #27a644;"></span>
+              All Systems Operational
+            </div>
+          </div>
+          <div>
+            <div style="font-size: 12px; font-weight: 510; color: #ffffff; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Product</div>
+            <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: #8a8f98;">
+              <span style="color: #d0d6e0;">Issue Tracking</span>
+              <span>Cycles &amp; Roadmaps</span>
+              <span>Customer Requests</span>
+              <span>Integrations</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-size: 12px; font-weight: 510; color: #ffffff; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Resources</div>
+            <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: #8a8f98;">
+              <span>Documentation</span>
+              <span>API &amp; Webhooks</span>
+              <span>design.md Specs</span>
+              <span>Changelog</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-size: 12px; font-weight: 510; color: #ffffff; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Command Telemetry</div>
+            <div style="background: #0f1011; border-radius: 8px; padding: 12px; box-shadow: inset 0 0 0 1px #23252a; font-family: ui-monospace, monospace; font-size: 11px; color: #8a8f98; line-height: 1.6;">
+              <div>v2.4.19 · prod-us-east</div>
+              <div>p99: 14ms · 100% uptime</div>
+            </div>
+          </div>
+        </div>
+        <div style="border-top: 1px solid #23252a; padding-top: 18px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #8a8f98; flex-wrap: wrap; gap: 8px;">
+          <div style="font-family: ui-monospace, monospace;">Level 0: #08090a • Level 1: #0f1011 • Border: #23252a</div>
+          <div>© 2026 Linear Design System</div>
+        </div>
+      </div>
+    `,
+    features: ['System health status telemetry pill', 'Berkeley Mono metadata card', '0.5px hairline Graphite separation', 'Void and Carbon surface levels'],
+    included: ['React JSX Component', 'Tailwind Classes', 'HTML/CSS Layout']
+  }
 
 export const BUNDLES = [
   {
