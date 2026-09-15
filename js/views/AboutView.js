@@ -1,5 +1,6 @@
 /**
  * AboutView Component
+ * Dark Mode Default & Full Window Height Layout
  * Articulates the design philosophy and architectural principles from design.md:
  * - Editorial zinc grid with confetti-orange punctuation
  * - Restrained, neutral-first visual register
@@ -24,9 +25,9 @@ export function renderAboutView() {
   ];
 
   return `
-    <div class="about-page">
+    <div class="about-page" style="min-height: calc(100vh - 68px);">
       <!-- Hero Manifesto -->
-      <section class="section-gap" style="background-color: var(--color-paper); border-bottom: 1px solid var(--color-cloud);">
+      <section style="background-color: var(--surface-canvas); border-bottom: 1px solid var(--color-cloud); padding: 60px 0;">
         <div class="container" style="max-width: 860px;">
           <span class="badge-ember" style="margin-bottom: 16px;">THE AZAREL MANIFESTO</span>
           <h1 class="text-display" style="margin-bottom: 24px;">
@@ -36,13 +37,13 @@ export function renderAboutView() {
             Most modern design marketplaces suffer from sensory overload: saturated gradient blobs, heavy drop shadows, and arbitrary accent colors competing for attention.
           </p>
           <p class="text-body-lg" style="color: var(--color-steel);">
-            Azarel was created to prove that clarity is the highest form of craftsmanship. Our system is 99% achromatic: an architectural zinc-gray scale carries nearly the entire interface, with one vivid confetti-orange badge accent (<code style="background: #ffffff; padding: 2px 6px; border-radius: 6px; border: 1px solid #ececee;">#ff5a00</code>) and almost no other chromatic intrusion.
+            Azarel was created to prove that clarity is the highest form of craftsmanship. Our system is 99% achromatic: an architectural zinc-gray scale carries nearly the entire interface, with one vivid confetti-orange badge accent (<code style="background: var(--surface-subtle-card); padding: 2px 6px; border-radius: 6px; border: 1px solid var(--color-cloud);">#ff5a00</code>) and almost no other chromatic intrusion.
           </p>
         </div>
       </section>
 
       <!-- Geometry Philosophy Section -->
-      <section class="section-gap">
+      <section style="padding: 60px 0; border-bottom: 1px solid var(--color-cloud);">
         <div class="container">
           <div style="margin-bottom: 48px; max-width: 700px;">
             <span class="tag-pill" style="margin-bottom: 10px;">Geometry Triad</span>
@@ -58,7 +59,7 @@ export function renderAboutView() {
                 <span style="font-size: 40px; font-weight: 700; color: var(--color-obsidian);">36px</span>
                 <span class="tag-pill">Cards &amp; Large Surfaces</span>
               </div>
-              <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 8px;">Generous Enclosures</h3>
+              <h3 style="font-size: 18px; font-weight: 600; color: var(--color-obsidian); margin-bottom: 8px;">Generous Enclosures</h3>
               <p style="font-size: 14px; color: var(--color-steel); line-height: 1.55;">
                 Cards feel spacious, inviting, and architecturally grounded. Hairline 1px borders replace drop shadows as the primary elevation tool.
               </p>
@@ -69,7 +70,7 @@ export function renderAboutView() {
                 <span style="font-size: 40px; font-weight: 700; color: var(--color-obsidian);">14px</span>
                 <span class="tag-pill">Buttons &amp; Inputs</span>
               </div>
-              <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 8px;">Compact Precision</h3>
+              <h3 style="font-size: 18px; font-weight: 600; color: var(--color-obsidian); margin-bottom: 8px;">Compact Precision</h3>
               <p style="font-size: 14px; color: var(--color-steel); line-height: 1.55;">
                 Buttons feel precise and contained. The deliberate asymmetry with 36px cards creates crisp tactile feedback for every interactive CTA.
               </p>
@@ -80,7 +81,7 @@ export function renderAboutView() {
                 <span style="font-size: 40px; font-weight: 700; color: var(--color-obsidian);">10000px</span>
                 <span class="tag-pill">Navigation Pills</span>
               </div>
-              <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 8px;">Continuous Flow</h3>
+              <h3 style="font-size: 18px; font-weight: 600; color: var(--color-obsidian); margin-bottom: 8px;">Continuous Flow</h3>
               <p style="font-size: 14px; color: var(--color-steel); line-height: 1.55;">
                 Reserved exclusively for primary navigation CTAs and segmented mode controllers to guide eyes smoothly along high-level actions.
               </p>
@@ -90,7 +91,7 @@ export function renderAboutView() {
       </section>
 
       <!-- Interactive Swatch Palette -->
-      <section class="section-gap" style="background-color: #ffffff; border-top: 1px solid var(--color-cloud); border-bottom: 1px solid var(--color-cloud);">
+      <section style="padding: 60px 0; border-bottom: 1px solid var(--color-cloud);">
         <div class="container">
           <div style="margin-bottom: 40px;">
             <span class="badge-ember" style="margin-bottom: 10px;">SYSTEM TOKENS</span>
@@ -102,7 +103,7 @@ export function renderAboutView() {
 
           <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px;">
             ${tokens.map(t => `
-              <div style="border: 1px solid var(--color-cloud); border-radius: 20px; overflow: hidden; background: #fafafa;">
+              <div style="border: 1px solid var(--color-cloud); border-radius: 20px; overflow: hidden; background: var(--surface-card);">
                 <div style="height: 70px; background-color: ${t.hex}; border-bottom: 1px solid var(--color-cloud);"></div>
                 <div style="padding: 16px;">
                   <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
@@ -118,7 +119,7 @@ export function renderAboutView() {
       </section>
 
       <!-- CTA -->
-      <section class="section-gap" style="text-align: center;">
+      <section style="padding: 60px 0; text-align: center;">
         <div class="container">
           <h2 class="text-heading" style="margin-bottom: 16px;">Ready to explore the marketplace?</h2>
           <p class="text-body-lg" style="margin-bottom: 28px; max-width: 500px; margin-left: auto; margin-right: auto;">

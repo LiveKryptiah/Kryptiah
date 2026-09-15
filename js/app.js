@@ -1,5 +1,6 @@
 /**
  * Azarel Main Application Bootstrap
+ * Dark Mode Default & Reactive Routing
  * Connects global UI actions, state subscriptions, toast notifications, and router.
  */
 
@@ -7,6 +8,30 @@ import { state } from './state.js';
 import { initRouter, handleRoute } from './router.js';
 import { PRODUCTS } from './data/products.js';
 import { renderPreviewModal } from './components/PreviewModal.js';
+
+// --- Theme Manager (Dark Mode Default) ---
+function initTheme() {
+  const savedTheme = localStorage.getItem('azarel_theme') || 'dark';
+  if (savedTheme === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+  }
+}
+
+window.azarelToggleTheme = () => {
+  const current = document.documentElement.getAttribute('data-theme');
+  if (current === 'light') {
+    document.documentElement.removeAttribute('data-theme');
+    localStorage.setItem('azarel_theme', 'dark');
+    state.notifyToast('Switched to Dark Mode (Default)');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
+    localStorage.setItem('azarel_theme', 'light');
+    state.notifyToast('Switched to Light Mode');
+  }
+  handleRoute();
+};
 
 // --- Toast Manager ---
 function initToasts() {
@@ -128,14 +153,14 @@ window.azarelSetViewportWidth = (width) => {
   });
 
   if (width === '100%' && btnDesktop) {
-    btnDesktop.style.background = '#09090b';
-    btnDesktop.style.color = 'white';
+    btnDesktop.style.background = '#f4f4f5';
+    btnDesktop.style.color = '#09090b';
   } else if (width === '768px' && btnTablet) {
-    btnTablet.style.background = '#09090b';
-    btnTablet.style.color = 'white';
+    btnTablet.style.background = '#f4f4f5';
+    btnTablet.style.color = '#09090b';
   } else if (width === '375px' && btnMobile) {
-    btnMobile.style.background = '#09090b';
-    btnMobile.style.color = 'white';
+    btnMobile.style.background = '#f4f4f5';
+    btnMobile.style.color = '#09090b';
   }
 };
 
@@ -150,7 +175,7 @@ window.azarelTogglePreviewTheme = () => {
     state.notifyToast('Preview switched to Light theme');
   } else {
     frame.setAttribute('data-theme', 'dark');
-    frame.style.backgroundColor = '#18181b';
+    frame.style.backgroundColor = '#121215';
     frame.style.color = '#f4f4f5';
     state.notifyToast('Preview switched to Dark theme');
   }
@@ -197,11 +222,11 @@ window.azarelSetBilling = (mode) => {
   if (mode === 'annual') {
     if (btnAnnual) {
       btnAnnual.className = 'btn-primary';
-      btnAnnual.style.border = '1.5px solid rgb(44, 46, 52)';
+      btnAnnual.style.border = '1px solid #ffffff';
     }
     if (btnMonthly) {
       btnMonthly.className = 'btn-ghost';
-      btnMonthly.style.border = 'none';
+      btnMonthly.style.border = '1px solid var(--color-cloud)';
     }
     if (proPrice) proPrice.textContent = '$24';
     if (proPeriod) proPeriod.textContent = ' / month (billed annually)';
@@ -211,11 +236,11 @@ window.azarelSetBilling = (mode) => {
   } else {
     if (btnAnnual) {
       btnAnnual.className = 'btn-ghost';
-      btnAnnual.style.border = 'none';
+      btnAnnual.style.border = '1px solid var(--color-cloud)';
     }
     if (btnMonthly) {
       btnMonthly.className = 'btn-primary';
-      btnMonthly.style.border = '1.5px solid rgb(44, 46, 52)';
+      btnMonthly.style.border = '1px solid #ffffff';
     }
     if (proPrice) proPrice.textContent = '$32';
     if (proPeriod) proPeriod.textContent = ' / month (billed monthly)';
@@ -226,6 +251,8 @@ window.azarelSetBilling = (mode) => {
 };
 
 // --- Boot Application ---
+initTheme();
+
 document.addEventListener('DOMContentLoaded', () => {
   initToasts();
   initKeyboardShortcuts();

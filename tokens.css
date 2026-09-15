@@ -1,19 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap');
 
+/* ==========================================================================
+   Azarel Tokens — Dark Mode Default
+   ========================================================================== */
+
 :root {
-  /* Colors */
-  --color-obsidian: #09090b;
-  --color-graphite: #18181b;
-  --color-slate: #27272a;
-  --color-iron: #3f3f46;
-  --color-steel: #52525b;
-  --color-fog: #71717a;
-  --color-ash: #a1a1aa;
-  --color-mist: #d4d4d8;
-  --color-cloud: #ececee;
-  --color-paper: #f4f4f5;
-  --color-snow: #ffffff;
-  --color-ember: #ff5a00;
+  /* Theme Flag */
+  --theme: 'dark';
+
+  /* Dark Mode Palette (Default) */
+  --color-obsidian: #f4f4f5; /* Primary text / headings in dark mode */
+  --color-graphite: #e4e4e7; /* Body copy ink */
+  --color-slate: #18181b;    /* Elevated card surfaces */
+  --color-iron: #d4d4d8;     /* Button labels and active tags */
+  --color-steel: #a1a1aa;    /* Secondary text / icon strokes */
+  --color-fog: #71717a;      /* Tertiary labels */
+  --color-ash: #52525b;      /* Disabled / placeholder */
+  --color-mist: #3f3f46;     /* Structural divider & card borders on hover */
+  --color-cloud: #27272a;    /* 1px hairline rules */
+  --color-paper: #09090b;    /* Canvas background (pure obsidian ground) */
+  --color-snow: #121215;     /* Elevated card fill */
+  --color-ember: #ff5a00;    /* Accent badge / YC highlight */
   --color-magenta-spark: #fe45e2;
 
   /* Typography — Font Families (Substitute: DM Sans) */
@@ -63,7 +70,7 @@
   --spacing-120: 120px;
 
   /* Layout */
-  --page-max-width: 1200px;
+  --page-max-width: 1240px;
   --section-gap: 80px;
   --card-padding: 28px;
   --element-gap: 8px;
@@ -93,6 +100,39 @@
   --radius-buttons: 14px;
 
   /* Shadows & Inset Highlights */
+  --shadow-subtle: inset 0 0.5px 0 0 rgba(255, 255, 255, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.1), 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-subtle-2: rgb(39, 39, 42) 0px 1px 0px 0px inset;
+  --shadow-subtle-3: rgba(255, 255, 255, 0.1) 0px 0.5px 0px 0px inset;
+  --shadow-subtle-4: rgba(255, 255, 255, 0.1) 0px -0.5px 0px 0px;
+  --shadow-subtle-5: rgb(39, 39, 42) 0px -1px 0px 0px;
+  --shadow-md: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+
+  /* Surfaces (Dark Mode Default) */
+  --surface-canvas: #09090b;
+  --surface-card: #121215;
+  --surface-subtle-card: #18181b;
+  --surface-dark-surface: #18181b;
+  --surface-deep-dark: #27272a;
+  --surface-header: rgba(9, 9, 11, 0.88);
+}
+
+/* Light Mode Overrides (when explicitly toggled) */
+[data-theme="light"] {
+  --theme: 'light';
+  --color-obsidian: #09090b;
+  --color-graphite: #18181b;
+  --color-slate: #27272a;
+  --color-iron: #3f3f46;
+  --color-steel: #52525b;
+  --color-fog: #71717a;
+  --color-ash: #a1a1aa;
+  --color-mist: #d4d4d8;
+  --color-cloud: #ececee;
+  --color-paper: #f4f4f5;
+  --color-snow: #ffffff;
+  --color-ember: #ff5a00;
+  --color-magenta-spark: #fe45e2;
+
   --shadow-subtle: rgba(255, 255, 255, 0.5) 0px 0.5px 0px 0px inset, rgba(117, 123, 133, 0.4) 0px 9px 14px -5px inset, rgb(44, 46, 52) 0px 0px 0px 1.5px, rgba(0, 0, 0, 0.14) 0px 4px 6px 0px;
   --shadow-subtle-2: rgb(228, 228, 231) 0px 1px 0px 0px inset;
   --shadow-subtle-3: rgb(255, 255, 255) 0px 0.5px 0px 0px inset;
@@ -100,10 +140,10 @@
   --shadow-subtle-5: rgb(228, 228, 231) 0px -1px 0px 0px;
   --shadow-md: rgba(0, 0, 0, 0.04) 0px 4px 12px 0px;
 
-  /* Surfaces */
   --surface-canvas: #f4f4f5;
   --surface-card: #ffffff;
   --surface-subtle-card: #fafafa;
   --surface-dark-surface: #18181b;
   --surface-deep-dark: #27272a;
+  --surface-header: rgba(244, 244, 245, 0.85);
 }

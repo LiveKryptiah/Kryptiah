@@ -1,5 +1,6 @@
 /* ==========================================================================
    Azarel — Awesomic Design System Stylesheet
+   Dark Mode Default & Windows Full Screen Per Section Sizing
    Strictly adheres to design.md / STYLE_GUIDE.md
    ========================================================================== */
 
@@ -21,13 +22,16 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
 }
 
 body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--color-paper);
+  background-color: var(--surface-canvas);
+  color: var(--color-graphite);
+  overflow-x: hidden;
 }
 
 a {
@@ -47,32 +51,69 @@ input, textarea, select {
   font-size: inherit;
 }
 
-/* --- Container & Layout --- */
+/* --- Container & Windows Full Screen Section Sizing --- */
 .container {
   width: 100%;
   max-width: var(--page-max-width);
   margin-left: auto;
   margin-right: auto;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-left: 32px;
+  padding-right: 32px;
 }
 
 @media (max-width: 640px) {
   .container {
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 18px;
+    padding-right: 18px;
   }
 }
 
+/* Hero Section: Fills exact window viewport minus navbar (68px) */
+.section-fullscreen-hero {
+  min-height: calc(100vh - 68px);
+  min-height: calc(100dvh - 68px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  box-sizing: border-box;
+  scroll-snap-align: start;
+  position: relative;
+  border-bottom: 1px solid var(--color-cloud);
+}
+
+/* Per Section Sizing: Fills full Windows screen height */
+.section-fullscreen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  box-sizing: border-box;
+  scroll-snap-align: start;
+  position: relative;
+  border-bottom: 1px solid var(--color-cloud);
+}
+
+/* Standard gap for non-fullscreen pages if needed */
 .section-gap {
   padding-top: var(--section-gap);
   padding-bottom: var(--section-gap);
 }
 
-@media (max-width: 768px) {
-  .section-gap {
-    padding-top: 48px;
-    padding-bottom: 48px;
+@media (max-width: 960px) {
+  html {
+    scroll-snap-type: none;
+  }
+  .section-fullscreen-hero,
+  .section-fullscreen {
+    min-height: auto;
+    padding-top: 56px;
+    padding-bottom: 56px;
+    scroll-snap-align: none;
   }
 }
 
@@ -98,6 +139,7 @@ input, textarea, select {
   line-height: var(--leading-heading);
   font-weight: var(--font-weight-semibold);
   color: var(--color-obsidian);
+  letter-spacing: -0.01em;
 }
 
 .text-heading-sm {
@@ -138,41 +180,53 @@ input, textarea, select {
 
 @media (max-width: 768px) {
   .text-display {
-    font-size: 40px;
+    font-size: 38px;
     line-height: 1.15;
   }
   .text-heading-lg {
-    font-size: 36px;
+    font-size: 32px;
     line-height: 1.2;
   }
   .text-heading {
-    font-size: 30px;
+    font-size: 26px;
   }
 }
 
-/* --- Components: Buttons --- */
-/* Primary Action Button (Dark Filled) */
+/* --- Components: Buttons (Dark Mode Optimized) --- */
+/* Primary Action Button */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background-color: var(--color-obsidian);
-  color: var(--color-snow);
+  background-color: #f4f4f5;
+  color: #09090b;
   font-size: 14px;
-  font-weight: var(--font-weight-medium);
-  padding: 12px 18px;
+  font-weight: 600;
+  padding: 12px 20px;
   border-radius: var(--radius-buttons);
-  border: 1.5px solid rgb(44, 46, 52);
-  box-shadow: var(--shadow-subtle);
+  border: 1px solid #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   text-align: center;
   white-space: nowrap;
 }
 
+[data-theme="light"] .btn-primary {
+  background-color: #09090b;
+  color: #ffffff;
+  border: 1.5px solid rgb(44, 46, 52);
+  box-shadow: var(--shadow-subtle);
+}
+
 .btn-primary:hover {
-  background-color: #1a1a1f;
+  background-color: #ffffff;
   transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="light"] .btn-primary:hover {
+  background-color: #1a1a1f;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
@@ -180,75 +234,80 @@ input, textarea, select {
   transform: translateY(0);
 }
 
-/* Primary Pill Button (Navigation & Special CTAs) */
+/* Primary Pill Button (Navigation & High-priority CTAs) */
 .btn-pill-dark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background-color: var(--color-obsidian);
-  color: var(--color-snow);
-  font-size: 14px;
-  font-weight: var(--font-weight-medium);
-  padding: 10px 20px;
+  background-color: #f4f4f5;
+  color: #09090b;
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 9px 20px;
   border-radius: var(--radius-pills);
-  border: 1.5px solid rgb(44, 46, 52);
-  box-shadow: var(--shadow-subtle);
+  border: 1px solid #ffffff;
   transition: all 0.2s ease;
 }
 
+[data-theme="light"] .btn-pill-dark {
+  background-color: #09090b;
+  color: #ffffff;
+  border: 1.5px solid rgb(44, 46, 52);
+}
+
 .btn-pill-dark:hover {
-  background-color: #18181b;
+  background-color: #ffffff;
   transform: translateY(-1px);
 }
 
-/* Ghost Action Button (White) */
+/* Ghost Action Button */
 .btn-ghost {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background-color: var(--color-snow);
-  color: var(--color-iron);
+  background-color: var(--surface-card);
+  color: var(--color-obsidian);
   font-size: 14px;
   font-weight: var(--font-weight-medium);
-  padding: 12px 20px;
+  padding: 11px 18px;
   border-radius: var(--radius-buttons);
   border: 1px solid var(--color-cloud);
-  box-shadow: var(--shadow-subtle-2);
   transition: all 0.2s ease;
 }
 
 .btn-ghost:hover {
-  background-color: #fafafa;
+  background-color: var(--surface-subtle-card);
   border-color: var(--color-mist);
-  color: var(--color-obsidian);
+  color: #ffffff;
 }
 
-/* Neutral Pill Button (Light) */
+/* Neutral Pill Button */
 .btn-neutral-pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background-color: #f0f0f2;
+  background-color: var(--surface-subtle-card);
   color: var(--color-graphite);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: var(--font-weight-medium);
-  padding: 10px 18px;
+  padding: 8px 16px;
   border-radius: var(--radius-pills);
-  border: 1px solid transparent;
+  border: 1px solid var(--color-cloud);
   transition: all 0.2s ease;
 }
 
 .btn-neutral-pill:hover {
-  background-color: #e5e5e8;
+  background-color: var(--color-mist);
   color: var(--color-obsidian);
 }
 
 .btn-neutral-pill.active {
-  background-color: var(--color-obsidian);
-  color: var(--color-snow);
+  background-color: #f4f4f5;
+  color: #09090b;
+  border-color: #f4f4f5;
 }
 
 /* --- Components: Badges & Tags --- */
@@ -256,8 +315,8 @@ input, textarea, select {
 .tag-pill {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  background: transparent;
+  gap: 5px;
+  background: var(--surface-subtle-card);
   color: var(--color-graphite);
   border: 1px solid var(--color-cloud);
   border-radius: var(--radius-badges);
@@ -273,8 +332,9 @@ input, textarea, select {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  background-color: var(--color-iron);
-  color: #fafafa;
+  background-color: #27272a;
+  color: #f4f4f5;
+  border: 1px solid #3f3f46;
   border-radius: var(--radius-badges);
   padding: 4px 10px;
   font-size: 12px;
@@ -283,23 +343,22 @@ input, textarea, select {
   white-space: nowrap;
 }
 
-/* Orange Accent Badge (Reserved for highlights, YC-style badge, and key callouts) */
+/* Orange Accent Badge (YC Badge & Core Highlight) */
 .badge-ember {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   background-color: var(--color-ember);
-  color: var(--color-snow);
+  color: #ffffff;
   border-radius: var(--radius-badges);
   padding: 4px 10px;
   font-size: 12px;
-  font-weight: var(--font-weight-semibold);
-  letter-spacing: 0.01em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   white-space: nowrap;
 }
 
-/* --- Components: Cards --- */
-/* Awesomic Standard Card (36px radius, hairline border, no drop shadow) */
+/* --- Components: Cards (Dark Mode Hairline Grid) --- */
 .card-awesomic {
   background-color: var(--surface-card);
   border-radius: var(--radius-cards);
@@ -314,7 +373,7 @@ input, textarea, select {
   border-color: var(--color-mist);
 }
 
-/* Category Card with Top Image flush */
+/* Category Card */
 .card-category {
   background-color: var(--surface-card);
   border-radius: var(--radius-cards);
@@ -328,14 +387,14 @@ input, textarea, select {
 
 .card-category:hover {
   border-color: var(--color-mist);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
 .card-category-image-wrap {
   width: 100%;
-  height: 220px;
+  height: 180px;
   overflow: hidden;
-  background-color: #e4e4e7;
+  background-color: #09090b;
   position: relative;
 }
 
@@ -351,25 +410,25 @@ input, textarea, select {
 }
 
 .card-category-body {
-  padding: 24px 28px 28px 28px;
+  padding: 22px 24px 24px 24px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   justify-content: space-between;
 }
 
-/* Dark Feature Card (Inverted Surface) */
+/* Inverted Dark Feature Card */
 .card-dark-feature {
-  background-color: var(--color-slate);
-  color: var(--color-snow);
+  background-color: #121215;
+  color: #f4f4f5;
   border-radius: var(--radius-cards);
-  border: 1px solid #333338;
-  padding: 48px;
+  border: 1px solid var(--color-cloud);
+  padding: 40px;
 }
 
 @media (max-width: 768px) {
   .card-dark-feature {
-    padding: 28px 20px;
+    padding: 24px 18px;
   }
 }
 
@@ -377,11 +436,11 @@ input, textarea, select {
   display: flex;
   align-items: flex-start;
   gap: 16px;
-  font-size: 19px;
+  font-size: 18px;
   font-weight: var(--font-weight-medium);
-  color: var(--color-snow);
-  padding: 16px 0;
-  border-bottom: 1px solid #333338;
+  color: #f4f4f5;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--color-cloud);
 }
 
 .feature-list-item:last-child {
@@ -397,7 +456,7 @@ input, textarea, select {
 
 /* --- Form Controls --- */
 .input-field {
-  background-color: var(--color-snow);
+  background-color: var(--surface-card);
   border: 1px solid var(--color-cloud);
   border-radius: var(--radius-inputs);
   padding: 12px 18px;
@@ -409,7 +468,7 @@ input, textarea, select {
 }
 
 .input-field:focus {
-  border-color: var(--color-graphite);
+  border-color: var(--color-steel);
 }
 
 .input-field::placeholder {
@@ -421,11 +480,11 @@ input, textarea, select {
   display: flex;
   align-items: center;
   gap: 8px;
-  background-color: var(--color-snow);
+  background-color: var(--surface-card);
   border: 1px solid var(--color-cloud);
   border-radius: 18px;
-  padding: 6px 6px 6px 16px;
-  box-shadow: var(--shadow-md);
+  padding: 6px 6px 6px 18px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
   max-width: 480px;
 }
 
@@ -438,14 +497,18 @@ input, textarea, select {
   flex-grow: 1;
 }
 
+.hero-input-group input::placeholder {
+  color: var(--color-ash);
+}
+
 /* --- Navigation Header --- */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 50;
-  background-color: rgba(244, 244, 245, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background-color: var(--surface-header);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--color-cloud);
   transition: all 0.2s ease;
 }
@@ -461,7 +524,7 @@ input, textarea, select {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 26px;
   list-style: none;
 }
 
@@ -481,7 +544,7 @@ input, textarea, select {
 .nav-link.active::after {
   content: '';
   position: absolute;
-  bottom: 0;
+  bottom: -2px;
   left: 0;
   width: 100%;
   height: 2px;
@@ -492,17 +555,12 @@ input, textarea, select {
 /* --- Breakthrough Image Section --- */
 .breakthrough-image-section {
   width: 100%;
-  border-radius: 48px;
+  border-radius: 36px;
   overflow: hidden;
-  height: 420px;
+  height: 320px;
   position: relative;
-  background-color: #27272a;
-}
-
-.breakthrough-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  background-color: #121215;
+  border: 1px solid var(--color-cloud);
 }
 
 /* --- Stats Row --- */
@@ -515,7 +573,7 @@ input, textarea, select {
 @media (max-width: 768px) {
   .stats-grid {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 16px;
   }
 }
 
@@ -526,7 +584,7 @@ input, textarea, select {
 }
 
 .stat-number {
-  font-size: 52px;
+  font-size: 48px;
   font-weight: var(--font-weight-semibold);
   line-height: 1;
   color: var(--color-obsidian);
@@ -534,7 +592,7 @@ input, textarea, select {
 }
 
 .stat-label {
-  font-size: 14px;
+  font-size: 13.5px;
   color: var(--color-steel);
   line-height: 1.4;
 }
@@ -545,25 +603,25 @@ input, textarea, select {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 48px;
-  padding: 24px 0;
+  gap: 40px;
+  padding: 16px 0;
 }
 
 .logo-item {
-  color: var(--color-fog);
-  font-size: 18px;
+  color: var(--color-steel);
+  font-size: 16px;
   font-weight: 700;
   letter-spacing: -0.02em;
   opacity: 0.65;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, color 0.2s ease;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
 .logo-item:hover {
-  opacity: 0.95;
-  color: var(--color-slate);
+  opacity: 1;
+  color: var(--color-obsidian);
 }
 
 /* --- Product Cards & Grid --- */
@@ -592,15 +650,15 @@ input, textarea, select {
 
 .product-card:hover {
   border-color: var(--color-mist);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.05);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px -12px rgba(0, 0, 0, 0.6);
 }
 
 .product-card-preview {
   position: relative;
   width: 100%;
-  height: 230px;
-  background-color: #f0f0f3;
+  height: 200px;
+  background-color: #09090b;
   overflow: hidden;
   border-bottom: 1px solid var(--color-cloud);
   display: flex;
@@ -621,8 +679,8 @@ input, textarea, select {
 
 .product-card-badges {
   position: absolute;
-  top: 14px;
-  left: 14px;
+  top: 12px;
+  left: 12px;
   display: flex;
   gap: 6px;
   z-index: 2;
@@ -630,8 +688,8 @@ input, textarea, select {
 
 .product-card-actions {
   position: absolute;
-  top: 14px;
-  right: 14px;
+  top: 12px;
+  right: 12px;
   display: flex;
   gap: 6px;
   z-index: 2;
@@ -641,7 +699,7 @@ input, textarea, select {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(18, 18, 21, 0.85);
   backdrop-filter: blur(8px);
   display: inline-flex;
   align-items: center;
@@ -652,22 +710,22 @@ input, textarea, select {
 }
 
 .btn-icon-circle:hover {
-  background-color: var(--color-snow);
-  color: var(--color-obsidian);
+  background-color: #27272a;
+  color: #ffffff;
   transform: scale(1.06);
 }
 
 .btn-icon-circle.favorited {
   color: #ef4444;
-  background-color: #fee2e2;
-  border-color: #fca5a5;
+  background-color: rgba(239, 68, 68, 0.15);
+  border-color: #ef4444;
 }
 
 .product-card-body {
-  padding: 24px 28px 24px 28px;
+  padding: 22px 24px 22px 24px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   flex-grow: 1;
 }
 
@@ -679,7 +737,7 @@ input, textarea, select {
 }
 
 .product-card-title {
-  font-size: 18px;
+  font-size: 17.5px;
   font-weight: var(--font-weight-semibold);
   color: var(--color-obsidian);
   line-height: 1.3;
@@ -710,7 +768,7 @@ input, textarea, select {
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  border-top: 1px solid #f2f2f4;
+  border-top: 1px solid var(--color-cloud);
 }
 
 .product-card-tags {
@@ -743,8 +801,8 @@ input, textarea, select {
 }
 
 .filter-section {
-  padding-bottom: 20px;
-  margin-bottom: 20px;
+  padding-bottom: 18px;
+  margin-bottom: 18px;
   border-bottom: 1px solid var(--color-cloud);
 }
 
@@ -755,10 +813,10 @@ input, textarea, select {
 }
 
 .filter-title {
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: var(--font-weight-semibold);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   color: var(--color-steel);
   margin-bottom: 12px;
 }
@@ -775,7 +833,7 @@ input, textarea, select {
 
 .filter-option input[type="radio"],
 .filter-option input[type="checkbox"] {
-  accent-color: var(--color-obsidian);
+  accent-color: #ff5a00;
   width: 16px;
   height: 16px;
   cursor: pointer;
@@ -783,10 +841,10 @@ input, textarea, select {
 
 /* --- Interactive Code Block & Live Frame --- */
 .code-preview-box {
-  background-color: #111113;
+  background-color: #09090b;
   color: #f4f4f5;
   border-radius: 20px;
-  border: 1px solid #27272a;
+  border: 1px solid var(--color-cloud);
   overflow: hidden;
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 }
@@ -796,19 +854,8 @@ input, textarea, select {
   align-items: center;
   justify-content: space-between;
   padding: 12px 20px;
-  background-color: #18181b;
-  border-bottom: 1px solid #27272a;
-}
-
-.code-header-dots {
-  display: flex;
-  gap: 6px;
-}
-
-.code-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
+  background-color: #121215;
+  border-bottom: 1px solid var(--color-cloud);
 }
 
 .code-content {
@@ -818,9 +865,9 @@ input, textarea, select {
   line-height: 1.6;
 }
 
-/* Live Product Frame with responsive simulator */
+/* Live Product Frame */
 .preview-viewport-container {
-  background-color: #e5e5e8;
+  background-color: #121215;
   border-radius: 28px;
   padding: 20px;
   border: 1px solid var(--color-cloud);
@@ -840,9 +887,9 @@ input, textarea, select {
 
 .preview-frame-wrap {
   width: 100%;
-  background: white;
+  background: #09090b;
   border-radius: 20px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
   overflow: hidden;
   transition: max-width 0.3s ease;
 }
@@ -900,8 +947,8 @@ input, textarea, select {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(9, 9, 11, 0.6);
-  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(10px);
   z-index: 100;
   display: flex;
   align-items: center;
@@ -925,7 +972,7 @@ input, textarea, select {
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.6);
   position: relative;
   transform: scale(0.97);
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -948,16 +995,16 @@ input, textarea, select {
 }
 
 .toast {
-  background-color: var(--color-obsidian);
-  color: var(--color-snow);
+  background-color: #18181b;
+  color: #f4f4f5;
   padding: 12px 20px;
   border-radius: var(--radius-buttons);
   font-size: 13.5px;
   display: flex;
   align-items: center;
   gap: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  border: 1px solid #27272a;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--color-mist);
   animation: slideUp 0.25s ease forwards;
 }
 
@@ -974,7 +1021,7 @@ input, textarea, select {
 
 /* --- Footer --- */
 .site-footer {
-  background-color: var(--surface-card);
+  background-color: #09090b;
   border-top: 1px solid var(--color-cloud);
   padding-top: 64px;
   padding-bottom: 40px;
@@ -1003,8 +1050,8 @@ input, textarea, select {
 
 /* --- Utilities --- */
 .badge-count {
-  background-color: var(--color-obsidian);
-  color: var(--color-snow);
+  background-color: #27272a;
+  color: #f4f4f5;
   font-size: 11px;
   font-weight: 600;
   border-radius: 999px;
@@ -1015,4 +1062,28 @@ input, textarea, select {
 
 .badge-count.ember {
   background-color: var(--color-ember);
+  color: #ffffff;
+}
+
+/* Scroll indicator pill at bottom of hero */
+.scroll-indicator-pill {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--color-steel);
+  background: var(--surface-card);
+  padding: 6px 14px;
+  border-radius: 10000px;
+  border: 1px solid var(--color-cloud);
+  animation: bounceSlow 2.5s infinite;
+}
+
+@keyframes bounceSlow {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, 6px); }
 }

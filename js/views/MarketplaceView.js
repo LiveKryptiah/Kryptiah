@@ -1,10 +1,10 @@
 /**
  * MarketplaceView Component
+ * Dark Mode Default & Full Window Height Layout
  * Unified catalog view handling:
  * - /sections, /components, /icons, /templates, /resources, /search, and /favorites
  * - Multi-criteria live filtering (Search, Category, Price, Framework, Style)
  * - Sorting by popularity, rating, price
- * - Pagination / Load more
  * - Clean empty states and active facet chips
  */
 
@@ -68,14 +68,14 @@ export function renderMarketplaceView(routeCategory = 'all', isFavoritesView = f
   const categoryDescription = getCategoryDescription(currentCategory, isFavoritesView);
 
   return `
-    <div class="marketplace-page">
+    <div class="marketplace-page" style="min-height: calc(100vh - 68px); display: flex; flex-direction: column;">
       <!-- Catalog Header Banner -->
-      <section style="background-color: var(--color-paper); border-bottom: 1px solid var(--color-cloud); padding: 48px 0;">
+      <section style="background-color: var(--surface-canvas); border-bottom: 1px solid var(--color-cloud); padding: 40px 0;">
         <div class="container">
-          <div style="max-width: 780px;">
+          <div style="max-width: 820px;">
             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
               <span class="badge-ember">${isFavoritesView ? 'SAVED' : 'MARKETPLACE'}</span>
-              <span class="tag-pill" style="background: white;">${filtered.length} Assets Found</span>
+              <span class="tag-pill">${filtered.length} Assets Found</span>
             </div>
             <h1 class="text-heading-lg" style="margin-bottom: 12px;">
               ${categoryTitle}
@@ -87,11 +87,11 @@ export function renderMarketplaceView(routeCategory = 'all', isFavoritesView = f
         </div>
       </section>
 
-      <!-- Main Marketplace Grid & Filter Section -->
-      <section class="section-gap">
+      <!-- Main Marketplace Grid & Filter Section (Fills remaining screen height) -->
+      <section style="padding: 48px 0; flex-grow: 1;">
         <div class="container">
           <!-- Live Toolbar: Search Bar + Sort Dropdown -->
-          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 32px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 28px;">
             <!-- Search input with icon -->
             <div style="position: relative; max-width: 440px; width: 100%;">
               <input 
@@ -100,24 +100,24 @@ export function renderMarketplaceView(routeCategory = 'all', isFavoritesView = f
                 placeholder="Search by keyword, tag, or framework..." 
                 value="${state.searchQuery}"
                 class="input-field" 
-                style="padding-left: 42px; border-radius: 14px; background: white;"
+                style="padding-left: 42px; border-radius: 14px; background: var(--surface-card);"
                 oninput="window.azarelSetSearch(this.value)"
               />
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#71717a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-steel)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%);">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
               ${state.searchQuery ? `
-                <button onclick="window.azarelSetSearch('')" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #a1a1aa; font-size: 14px;">✕</button>
+                <button onclick="window.azarelSetSearch('')" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--color-steel); font-size: 14px;">✕</button>
               ` : ''}
             </div>
 
-            <!-- Sort dropdown & mobile filter trigger -->
+            <!-- Sort dropdown -->
             <div style="display: flex; align-items: center; gap: 12px;">
               <span style="font-size: 13.5px; color: var(--color-steel);">Sort by:</span>
               <select 
                 class="input-field" 
-                style="padding: 8px 14px; font-size: 13.5px; border-radius: 12px; width: auto; background: white;"
+                style="padding: 8px 14px; font-size: 13.5px; border-radius: 12px; width: auto; background: var(--surface-card);"
                 onchange="window.azarelSetSort(this.value)"
               >
                 <option value="popular" ${state.sortBy === 'popular' ? 'selected' : ''}>Most Popular</option>
@@ -192,7 +192,7 @@ export function renderMarketplaceView(routeCategory = 'all', isFavoritesView = f
               </div>
 
               <!-- Commercial License Guarantee -->
-              <div style="background: #fafafa; border: 1px solid var(--color-cloud); border-radius: 16px; padding: 14px; font-size: 12px; color: var(--color-steel); line-height: 1.5;">
+              <div style="background: var(--surface-subtle-card); border: 1px solid var(--color-cloud); border-radius: 16px; padding: 14px; font-size: 12px; color: var(--color-steel); line-height: 1.5;">
                 <strong style="color: var(--color-obsidian); display: block; margin-bottom: 4px;">Perpetual Rights</strong>
                 Zero recurring royalties. Every asset includes unrestricted production rights.
               </div>
@@ -251,7 +251,7 @@ function renderActiveChips(currentCategory, isFavoritesView) {
     <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 24px;">
       <span style="font-size: 12px; color: var(--color-fog); font-weight: 600; text-transform: uppercase;">Active:</span>
       ${chips.map(chip => `
-        <span class="tag-pill" style="background: white; border-color: var(--color-mist); display: inline-flex; align-items: center; gap: 6px;">
+        <span class="tag-pill" style="background: var(--surface-card); border-color: var(--color-mist); display: inline-flex; align-items: center; gap: 6px;">
           ${chip.label}
           <button onclick="${chip.action}" style="color: var(--color-fog); font-weight: 700; cursor: pointer;">✕</button>
         </span>

@@ -1,16 +1,17 @@
 /**
  * Navbar Component
  * Adheres strictly to design.md:
- * - Sticky header with translucent blur
+ * - Sticky header with translucent blur (Dark mode default)
  * - 14px Cosmica/DM Sans typography
  * - 10000px pill CTA button
- * - Clean brand mark, search shortcut trigger, and responsive mobile drawer
+ * - Clean brand mark, search shortcut trigger, theme toggle, and responsive mobile drawer
  */
 
 import { state } from '../state.js';
 
 export function renderNavbar(currentPath) {
   const favCount = state.favorites.length;
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
   
   const navItems = [
     { label: 'Sections', href: '#/sections', key: 'sections' },
@@ -28,10 +29,10 @@ export function renderNavbar(currentPath) {
         <div class="header-inner">
           <!-- Logo -->
           <a href="#/" class="logo-link" style="display: flex; align-items: center; gap: 10px;">
-            <div style="width: 32px; height: 32px; background: #09090b; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 16px;">
+            <div style="width: 32px; height: 32px; background: #f4f4f5; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #09090b; font-weight: 700; font-size: 16px;">
               A
             </div>
-            <span style="font-size: 19px; font-weight: 700; letter-spacing: -0.02em; color: #09090b;">
+            <span style="font-size: 19px; font-weight: 700; letter-spacing: -0.02em; color: var(--color-obsidian);">
               Azarel
             </span>
             <span class="badge-ember" style="font-size: 10px; padding: 2px 6px; border-radius: 8px;">
@@ -53,7 +54,37 @@ export function renderNavbar(currentPath) {
           </nav>
 
           <!-- Right Actions -->
-          <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
+          <div class="header-actions" style="display: flex; align-items: center; gap: 10px;">
+            <!-- Theme Toggle (Moon / Sun) -->
+            <button 
+              type="button" 
+              onclick="window.azarelToggleTheme()" 
+              class="btn-ghost" 
+              style="padding: 8px 10px; border-radius: var(--radius-buttons);" 
+              title="Toggle Dark/Light Mode (Currently ${isLight ? 'Light' : 'Dark'})"
+              aria-label="Toggle Theme"
+            >
+              ${isLight ? `
+                <!-- Sun Icon -->
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="5"></circle>
+                  <line x1="12" y1="1" x2="12" y2="3"></line>
+                  <line x1="12" y1="21" x2="12" y2="23"></line>
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                  <line x1="1" y1="12" x2="3" y2="12"></line>
+                  <line x1="21" y1="12" x2="23" y2="12"></line>
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+              ` : `
+                <!-- Moon Icon -->
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+              `}
+            </button>
+
             <!-- Search trigger -->
             <a href="#/search" class="btn-ghost" style="padding: 8px 14px; border-radius: var(--radius-buttons); font-size: 13px; gap: 6px;" title="Search digital assets (Cmd+K)">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -61,7 +92,7 @@ export function renderNavbar(currentPath) {
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
               <span class="search-label" style="display: none;">Search...</span>
-              <kbd style="background: #f4f4f5; padding: 1px 5px; border-radius: 6px; font-size: 10px; color: #71717a; border: 1px solid #ececee;">⌘K</kbd>
+              <kbd style="background: var(--surface-subtle-card); padding: 1px 5px; border-radius: 6px; font-size: 10px; color: var(--color-steel); border: 1px solid var(--color-cloud);">⌘K</kbd>
             </a>
 
             <!-- Saved / Favorites link -->
@@ -73,7 +104,7 @@ export function renderNavbar(currentPath) {
             </a>
 
             <!-- 10000px Pill Primary CTA -->
-            <a href="#/sections" class="btn-pill-dark" style="padding: 9px 18px; font-size: 13.5px;">
+            <a href="#/sections" class="btn-pill-dark" style="padding: 8px 18px; font-size: 13.5px;">
               Explore Assets
             </a>
 

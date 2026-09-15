@@ -1,18 +1,19 @@
 /**
  * PricingView Component
+ * Dark Mode Default & Full Window Height Layout
  * Transparent pricing tiers for Azarel digital assets:
  * - Community Free ($0)
- * - Pro Solo ($29/mo or $240/yr)
- * - Team All-Access ($79/mo or $690/yr)
+ * - Pro Solo ($24/mo or $288/yr)
+ * - Team All-Access ($69/mo or $828/yr)
  * - Feature comparison matrix & FAQs
  */
 
 export function renderPricingView() {
   return `
-    <div class="pricing-page">
-      <!-- Pricing Hero -->
-      <section class="section-gap" style="background-color: var(--color-paper); border-bottom: 1px solid var(--color-cloud); text-align: center;">
-        <div class="container" style="max-width: 800px;">
+    <div class="pricing-page" style="min-height: calc(100vh - 68px);">
+      <!-- Pricing Hero (Windows Full Screen Ready) -->
+      <section style="background-color: var(--surface-canvas); border-bottom: 1px solid var(--color-cloud); text-align: center; padding: 60px 0;">
+        <div class="container" style="max-width: 820px;">
           <span class="badge-ember" style="margin-bottom: 16px;">TRANSPARENT LICENSING</span>
           <h1 class="text-display" style="margin-bottom: 16px;">
             Invest once. Ship indefinitely.
@@ -22,7 +23,7 @@ export function renderPricingView() {
           </p>
 
           <!-- Toggle: Annual vs Monthly -->
-          <div style="display: inline-flex; align-items: center; gap: 8px; background: white; padding: 6px 8px; border-radius: 10000px; border: 1px solid var(--color-cloud);">
+          <div style="display: inline-flex; align-items: center; gap: 8px; background: var(--surface-card); padding: 6px 8px; border-radius: 10000px; border: 1px solid var(--color-cloud);">
             <button 
               id="billing-annual-btn" 
               onclick="window.azarelSetBilling('annual')" 
@@ -44,7 +45,7 @@ export function renderPricingView() {
       </section>
 
       <!-- Pricing Cards Grid -->
-      <section class="section-gap">
+      <section style="padding: 60px 0; border-bottom: 1px solid var(--color-cloud);">
         <div class="container">
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; align-items: stretch;">
             <!-- Plan 1: Community Free -->
@@ -76,13 +77,13 @@ export function renderPricingView() {
             </div>
 
             <!-- Plan 2: Pro Solo (Highlighted) -->
-            <div class="card-awesomic" style="padding: 40px; border-color: var(--color-obsidian); position: relative; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-md);">
+            <div class="card-awesomic" style="padding: 40px; border-color: var(--color-mist); position: relative; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-md); background: #18181b;">
               <span class="badge-ember" style="position: absolute; top: 16px; right: 20px;">
                 MOST POPULAR
               </span>
 
               <div>
-                <span class="tag-pill" style="margin-bottom: 12px; background: #f4f4f5;">Individual Pro</span>
+                <span class="tag-pill" style="margin-bottom: 12px;">Individual Pro</span>
                 <h3 style="font-size: 24px; font-weight: 700; color: var(--color-obsidian); margin-bottom: 8px;">Pro Designer</h3>
                 <p style="font-size: 14px; color: var(--color-steel); line-height: 1.5; margin-bottom: 24px;">
                   Complete design system &amp; component library for solo builders and freelancers.
@@ -136,8 +137,8 @@ export function renderPricingView() {
 
               <button 
                 onclick="window.azarelPurchaseAsset('plan-team', 'Team All-Access Plan', 69)" 
-                class="btn-primary" 
-                style="width: 100%; border-radius: 14px; padding: 13px; background: var(--color-slate);"
+                class="btn-ghost" 
+                style="width: 100%; border-radius: 14px; padding: 13px;"
               >
                 Start Team Trial
               </button>
@@ -147,9 +148,9 @@ export function renderPricingView() {
       </section>
 
       <!-- License Comparison Table -->
-      <section class="section-gap" style="background-color: #ffffff; border-top: 1px solid var(--color-cloud);">
+      <section style="padding: 60px 0;">
         <div class="container">
-          <div style="text-align: center; max-width: 600px; margin: 0 auto 48px auto;">
+          <div style="text-align: center; max-width: 600px; margin: 0 auto 40px auto;">
             <h2 class="text-heading">Detailed Feature Comparison</h2>
             <p class="text-body" style="color: var(--color-steel); margin-top: 8px;">
               Everything included in each tier, verified against design.md guidelines.
@@ -159,7 +160,7 @@ export function renderPricingView() {
           <div style="overflow-x: auto;">
             <table style="width: 100%; border-collapse: collapse; font-size: 14px; text-align: left;">
               <thead>
-                <tr style="border-bottom: 2px solid var(--color-cloud);">
+                <tr style="border-bottom: 1px solid var(--color-cloud);">
                   <th style="padding: 16px; font-weight: 600; color: var(--color-obsidian);">Capability</th>
                   <th style="padding: 16px; font-weight: 600; color: var(--color-obsidian);">Community</th>
                   <th style="padding: 16px; font-weight: 600; color: var(--color-obsidian);">Pro Designer</th>

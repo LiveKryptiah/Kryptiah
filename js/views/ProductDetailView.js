@@ -1,5 +1,6 @@
 /**
  * ProductDetailView Component
+ * Dark Mode Default & Full Window Height Layout
  * High-fidelity product details matching design.md:
  * - Responsive preview frame with desktop / tablet / mobile breakpoints
  * - Light and dark preview toggle
@@ -17,8 +18,8 @@ export function renderProductDetailView(slug) {
   const product = PRODUCTS.find(p => p.slug === slug);
   if (!product) {
     return `
-      <div class="container section-gap" style="text-align: center;">
-        <div class="card-awesomic" style="padding: 64px 24px;">
+      <div class="container section-gap" style="text-align: center; min-height: calc(100vh - 68px); display: flex; align-items: center; justify-content: center;">
+        <div class="card-awesomic" style="padding: 64px 24px; max-width: 600px; margin: 0 auto;">
           <h2 class="text-heading" style="margin-bottom: 12px;">Asset Not Found</h2>
           <p class="text-body" style="color: var(--color-steel); margin-bottom: 24px;">
             The requested product slug "${slug}" does not exist in the catalog.
@@ -33,9 +34,9 @@ export function renderProductDetailView(slug) {
   const related = PRODUCTS.filter(p => p.id !== product.id && (p.category === product.category || p.style === product.style)).slice(0, 3);
 
   return `
-    <div class="product-detail-page">
+    <div class="product-detail-page" style="min-height: calc(100vh - 68px);">
       <!-- Breadcrumbs & Meta Top -->
-      <section style="background-color: var(--color-paper); border-bottom: 1px solid var(--color-cloud); padding: 24px 0;">
+      <section style="background-color: var(--surface-canvas); border-bottom: 1px solid var(--color-cloud); padding: 20px 0;">
         <div class="container">
           <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 13px; color: var(--color-steel);">
             <div style="display: flex; align-items: center; gap: 8px;">
@@ -47,7 +48,7 @@ export function renderProductDetailView(slug) {
             </div>
 
             <div style="display: flex; align-items: center; gap: 10px;">
-              <span class="tag-pill" style="background: white;">★ ${product.rating} (${product.reviewCount} reviews)</span>
+              <span class="tag-pill">★ ${product.rating} (${product.reviewCount} reviews)</span>
               ${product.isFree ? `<span class="badge-ember">FREE ASSET</span>` : `<span class="tag-filled">COMMERCIAL LICENSE</span>`}
             </div>
           </div>
@@ -55,7 +56,7 @@ export function renderProductDetailView(slug) {
       </section>
 
       <!-- Main Overview Grid: Live Preview & Purchase Sidebar -->
-      <section class="section-gap">
+      <section style="padding: 40px 0;">
         <div class="container">
           <div style="display: grid; grid-template-columns: 1fr 380px; gap: 36px; align-items: start;">
             <!-- Left: Hero Headline & Responsive Interactive Preview Viewport -->
@@ -78,12 +79,12 @@ export function renderProductDetailView(slug) {
               <div class="preview-viewport-container">
                 <div class="preview-toolbar">
                   <!-- Breakpoint Switchers -->
-                  <div style="display: flex; gap: 6px; background: white; padding: 4px; border-radius: 12px; border: 1px solid var(--color-cloud);">
+                  <div style="display: flex; gap: 6px; background: var(--surface-card); padding: 4px; border-radius: 12px; border: 1px solid var(--color-cloud);">
                     <button 
                       id="view-mode-desktop" 
                       onclick="window.azarelSetViewportWidth('100%')" 
                       class="btn-ghost active" 
-                      style="padding: 6px 12px; font-size: 12px; border: none; background: #09090b; color: white; border-radius: 8px;"
+                      style="padding: 6px 12px; font-size: 12px; border: none; background: #f4f4f5; color: #09090b; font-weight: 600; border-radius: 8px;"
                     >
                       Desktop 100%
                     </button>
@@ -109,7 +110,7 @@ export function renderProductDetailView(slug) {
                   <button 
                     onclick="window.azarelTogglePreviewTheme()" 
                     class="btn-ghost" 
-                    style="padding: 6px 12px; font-size: 12px; border-radius: 10px; background: white;"
+                    style="padding: 6px 12px; font-size: 12px; border-radius: 10px;"
                   >
                     Toggle Light/Dark Preview
                   </button>
@@ -142,7 +143,7 @@ export function renderProductDetailView(slug) {
                         type="button"
                         onclick="navigator.clipboard.writeText(decodeURIComponent('${encodeURIComponent(product.codeSnippet)}')); window.dispatchEvent(new CustomEvent('azarel:toast', { detail: { message: 'Code snippet copied to clipboard!' } }))" 
                         class="btn-primary" 
-                        style="padding: 6px 14px; font-size: 12px; border-radius: 10px; background: #27272a; border-color: #3f3f46;"
+                        style="padding: 6px 14px; font-size: 12px; border-radius: 10px;"
                       >
                         Copy Code
                       </button>
@@ -154,7 +155,7 @@ export function renderProductDetailView(slug) {
                 <!-- Tab 2: Specifications -->
                 <div id="tab-content-features" style="display: none;">
                   <div class="card-awesomic" style="padding: 32px;">
-                    <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px;">Engineered Specifications</h3>
+                    <h3 style="font-size: 18px; font-weight: 600; color: var(--color-obsidian); margin-bottom: 16px;">Engineered Specifications</h3>
                     <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px;">
                       ${product.features.map(f => `
                         <li style="display: flex; align-items: center; gap: 12px; font-size: 14.5px; color: var(--color-graphite);">
@@ -164,10 +165,10 @@ export function renderProductDetailView(slug) {
                       `).join('')}
                     </ul>
 
-                    <h3 style="font-size: 18px; font-weight: 600; margin-top: 28px; margin-bottom: 16px;">What is included in the package</h3>
+                    <h3 style="font-size: 18px; font-weight: 600; color: var(--color-obsidian); margin-top: 28px; margin-bottom: 16px;">What is included in the package</h3>
                     <div style="display: flex; flex-wrap: wrap; gap: 8px;">
                       ${product.included.map(inc => `
-                        <span class="tag-pill" style="font-size: 13px; padding: 6px 12px; background: #f4f4f5;">📦 ${inc}</span>
+                        <span class="tag-pill" style="font-size: 13px; padding: 6px 12px;">📦 ${inc}</span>
                       `).join('')}
                     </div>
                   </div>
@@ -186,9 +187,9 @@ export function renderProductDetailView(slug) {
                     </div>
 
                     <div style="display: flex; flex-direction: column; gap: 20px;">
-                      <div style="padding-bottom: 16px; border-bottom: 1px solid #f4f4f5;">
+                      <div style="padding-bottom: 16px; border-bottom: 1px solid var(--color-cloud);">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                          <strong>Danielle Miller · Lead Frontend Engineer</strong>
+                          <strong style="color: var(--color-obsidian);">Danielle Miller · Lead Frontend Engineer</strong>
                           <span style="color: var(--color-ember);">★★★★★</span>
                         </div>
                         <p style="font-size: 14px; color: var(--color-steel); line-height: 1.5;">
@@ -197,7 +198,7 @@ export function renderProductDetailView(slug) {
                       </div>
                       <div>
                         <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                          <strong>Alexei Morozov · Founder</strong>
+                          <strong style="color: var(--color-obsidian);">Alexei Morozov · Founder</strong>
                           <span style="color: var(--color-ember);">★★★★★</span>
                         </div>
                         <p style="font-size: 14px; color: var(--color-steel); line-height: 1.5;">
@@ -234,7 +235,7 @@ export function renderProductDetailView(slug) {
 
             <!-- Right Sidebar: Purchase / Download Card -->
             <aside style="position: sticky; top: 90px;">
-              <div class="card-awesomic" style="padding: 32px; background: white;">
+              <div class="card-awesomic" style="padding: 32px; background: var(--surface-card);">
                 <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px;">
                   <span style="font-size: 14px; color: var(--color-steel); font-weight: 500;">License Price</span>
                   <div style="text-align: right;">
@@ -295,9 +296,9 @@ export function renderProductDetailView(slug) {
 
       <!-- Related Products Section -->
       ${related.length > 0 ? `
-        <section class="section-gap" style="background-color: #ffffff; border-top: 1px solid var(--color-cloud);">
+        <section style="background-color: var(--surface-canvas); border-top: 1px solid var(--color-cloud); padding: 48px 0;">
           <div class="container">
-            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 36px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px;">
               <div>
                 <span class="tag-pill" style="margin-bottom: 8px;">Recommendations</span>
                 <h2 class="text-heading">Related Digital Assets</h2>
