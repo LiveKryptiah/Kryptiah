@@ -1,0 +1,85 @@
+{
+  "name": "Family Design System Tokens",
+  "theme": "light",
+  "concept": "storybook spread on cream parchment",
+  "colors": {
+    "creamCanvas": { "value": "#fbfaf9", "description": "Page background, nav surface — warm off-white that reads as paper" },
+    "stoneSurface": { "value": "#f2f0ed", "description": "Card surfaces, secondary panels, inset border tone" },
+    "inkBlack": { "value": "#121212", "description": "Headings, primary action fill, dark card surfaces" },
+    "headingCharcoal": { "value": "#343433", "description": "Primary text, nav text, decorative strokes" },
+    "bodyBrown": { "value": "#474645", "description": "Body copy, secondary text — warm desaturated brown" },
+    "mutedGray": { "value": "#7e7e7d", "description": "Helper text, inactive nav, tertiary labels" },
+    "stoneBorder": { "value": "#e5d5c3", "description": "Hairline decorative borders on illustrations and shapes" },
+    "linkBlue": { "value": "#0086fc", "description": "Inline links, feature list text" },
+    "skyBlue": { "value": "#64c6ff", "description": "Illustration fill, decorative mascot accents" },
+    "altBlue": { "value": "#00b2ff", "description": "Secondary illustration fill, icon accents" },
+    "grassGreen": { "value": "#00c978", "description": "Green text accent for links, tags, and short phrases" },
+    "mint": { "value": "#00ca48", "description": "Green wash for highlight backgrounds and soft emphasis" },
+    "emberOrange": { "value": "#ff3e00", "description": "Orange text accent for links, tags, demo links" },
+    "sunYellow": { "value": "#ffcd6c", "description": "Illustration fill, decorative shapes, mascot coloring" },
+    "gold": { "value": "#d48f00", "description": "Yellow text accent for links, tags, and emphasized phrases" },
+    "honey": { "value": "#ffbb26", "description": "Yellow wash for highlight backgrounds, decorative bands" },
+    "coralPink": { "value": "#ff58ae", "description": "Purchase badge fill, decorative illustration accent" },
+    "plumViolet": { "value": "#9f4fff", "description": "Violet wash for highlight backgrounds, decorative bands" },
+    "alertRed": { "value": "#ff2b3a", "description": "Red wash for destructive/attention states" }
+  },
+  "typography": {
+    "fontFamily": {
+      "display": "Family",
+      "body": "Inter",
+      "fallbacks": ["ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"]
+    },
+    "scale": {
+      "micro": { "fontSize": "12px", "lineHeight": "19px", "letterSpacing": "-0.01px" },
+      "caption": { "fontSize": "15px", "lineHeight": "22px", "letterSpacing": "-0.14px" },
+      "body": { "fontSize": "17px", "lineHeight": "26px", "letterSpacing": "-0.22px" },
+      "subheading": { "fontSize": "19px", "lineHeight": "27px", "letterSpacing": "-0.3px" },
+      "heading": { "fontSize": "23px", "lineHeight": "25px", "letterSpacing": "-0.44px" },
+      "headingLg": { "fontSize": "44px", "lineHeight": "53px", "letterSpacing": "-0.88px" },
+      "display": { "fontSize": "68px", "lineHeight": "75px", "letterSpacing": "-2.1px" }
+    }
+  },
+  "spacing": {
+    "4": "4px",
+    "8": "8px",
+    "12": "12px",
+    "16": "16px",
+    "20": "20px",
+    "24": "24px",
+    "28": "28px",
+    "32": "32px",
+    "36": "36px",
+    "48": "48px",
+    "60": "60px",
+    "76": "76px",
+    "80": "80px",
+    "92": "92px",
+    "96": "96px",
+    "104": "104px"
+  },
+  "borderRadius": {
+    "nav": "10px",
+    "cards": "10px",
+    "icons": "40px",
+    "pills": "9999px",
+    "small": "2px",
+    "badges": "6px",
+    "buttons": "32px",
+    "illustration": "72px"
+  },
+  "surfaces": {
+    "canvas": "#fbfaf9",
+    "stone": "#f2f0ed",
+    "sand": "#f6f4ef",
+    "pureWhite": "#ffffff",
+    "darkSurface": "#121212",
+    "fullBlack": "#000000"
+  },
+  "shadows": {
+    "subtle": "color(display-p3 0.94902 0.941176 0.929412) 0px 0px 0px 1px inset",
+    "subtle2": "color(display-p3 0.94902 0.941176 0.929412) 0px 0px 0px 0px inset",
+    "subtle3": "rgba(0, 0, 0, 0.04) 0px 0px 0px 1px",
+    "lg": "rgba(0, 0, 0, 0.15) 0px 0px 24px 0px",
+    "sm": "rgba(0, 0, 0, 0.04) 0px 1px 6px 0px, rgba(0, 0, 0, 0.05) 0px 0px 24px 0px"
+  }
+}
