@@ -146,7 +146,7 @@ export function renderMarketplaceView() {
             </button>
           </div>
         ` : `
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
             ${filteredSections.map(sec => renderProductCard(sec)).join('')}
           </div>
         `}

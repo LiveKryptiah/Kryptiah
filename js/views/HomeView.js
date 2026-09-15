@@ -15,7 +15,11 @@ import { renderHeroLeftMascotCluster, renderHeroRightMascotCluster } from '../co
 import { Icons } from '../components/Icons.js';
 
 export function renderHomeView() {
-  const featuredSections = SECTIONS_DATA.slice(0, 5);
+  const showcaseSections = [
+    SECTIONS_DATA.find(s => s.id === 'sec-hero-01') || SECTIONS_DATA[0],
+    SECTIONS_DATA.find(s => s.id === 'sec-bento-01') || SECTIONS_DATA[1],
+    SECTIONS_DATA.find(s => s.id === 'sec-pricing-01') || SECTIONS_DATA[2]
+  ];
 
   return `
     <div class="homepage">
@@ -76,105 +80,43 @@ export function renderHomeView() {
         </div>
       </section>
 
-      <!-- 2. EXPLORE SECTIONS (Fullscreen Section: 3-Column Grid Anchored by Dark Feature Card) -->
+      <!-- 2. EXPLORE SECTIONS (Minimal Fullscreen Section Showcase) -->
       <section class="section-fullscreen" style="border-top: 1px solid #f2f0ed;">
         <div class="container">
+          <!-- Minimal Showcase Header -->
           <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px; flex-wrap: wrap; gap: 16px;">
             <div>
-              <span style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #ff3e00;">
-                CURATED SELECTION
-              </span>
-              <h2 class="text-heading-lg" style="margin-top: 4px;">
-                Explore Website Sections
+              <div style="display: inline-flex; align-items: center; gap: 6px; background: #f2f0ed; padding: 4px 12px; border-radius: 9999px; margin-bottom: 8px;">
+                <span style="font-size: 11px; font-weight: 600; color: #ff3e00; text-transform: uppercase; letter-spacing: 0.05em;">SECTION SHOWCASE</span>
+              </div>
+              <h2 class="text-heading-lg" style="margin-top: 2px;">
+                Curated Website Sections
               </h2>
             </div>
-            <a href="#/sections" class="link-demo" style="font-size: 15px; font-weight: 600;">
+            <a href="#/sections" class="link-demo" style="font-size: 14px; font-weight: 600;">
               View all 16 sections in marketplace →
             </a>
           </div>
 
-          <!-- 3-Column Grid -->
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; align-items: stretch;">
-            <!-- Anchor Col 1: Signature Family Dark Feature Card -->
-            <div class="card-dark-feature" style="display: flex; flex-direction: column; justify-content: space-between;">
-              <div>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                  <span style="font-size: 11px; text-transform: uppercase; color: #7e7e7d; font-weight: 600; letter-spacing: 0.05em;">
-                    CORE CAPABILITIES
-                  </span>
-                  <span style="font-size: 11px; background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 4px; color: #ffffff;">
-                    v2.0
-                  </span>
-                </div>
-
-                <h3 style="font-size: 22px; font-weight: 600; color: #ffffff; margin-bottom: 8px;">
-                  Drop-In Ready Code
-                </h3>
-                <p style="font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.45; margin-bottom: 24px;">
-                  Every section comes fully styled with zero external bloat. Ready to paste directly into your project.
-                </p>
-
-                <!-- Stacked Action Rows with Crisp SVGs -->
-                <div style="display: flex; flex-direction: column; gap: 8px;">
-                  <div style="display: flex; align-items: center; gap: 12px; background: #121212; padding: 12px; border-radius: 8px;">
-                    <div style="width: 32px; height: 32px; border-radius: 50%; background: #0086fc; display: flex; align-items: center; justify-content: center;">
-                      ${Icons.react(16, '#ffffff')}
-                    </div>
-                    <div>
-                      <div style="font-size: 13px; font-weight: 600; color: #ffffff;">React 19 JSX Component</div>
-                      <div style="font-size: 11px; color: rgba(255,255,255,0.6);">Typed props &amp; reactive states</div>
-                    </div>
-                  </div>
-
-                  <div style="display: flex; align-items: center; gap: 12px; background: #121212; padding: 12px; border-radius: 8px;">
-                    <div style="width: 32px; height: 32px; border-radius: 50%; background: #9f4fff; display: flex; align-items: center; justify-content: center;">
-                      ${Icons.tailwind(16, '#ffffff')}
-                    </div>
-                    <div>
-                      <div style="font-size: 13px; font-weight: 600; color: #ffffff;">Tailwind CSS v4 Classes</div>
-                      <div style="font-size: 11px; color: rgba(255,255,255,0.6);">Pure utility classes &amp; CSS variables</div>
-                    </div>
-                  </div>
-
-                  <div style="display: flex; align-items: center; gap: 12px; background: #121212; padding: 12px; border-radius: 8px;">
-                    <div style="width: 32px; height: 32px; border-radius: 50%; background: #00c978; display: flex; align-items: center; justify-content: center;">
-                      ${Icons.mobile(16, '#ffffff')}
-                    </div>
-                    <div>
-                      <div style="font-size: 13px; font-weight: 600; color: #ffffff;">Responsive Breakpoints</div>
-                      <div style="font-size: 11px; color: rgba(255,255,255,0.6);">Tested across Mobile, Tablet, Desktop</div>
-                    </div>
-                  </div>
-
-                  <div style="display: flex; align-items: center; gap: 12px; background: #121212; padding: 12px; border-radius: 8px;">
-                    <div style="width: 32px; height: 32px; border-radius: 50%; background: #ff58ae; display: flex; align-items: center; justify-content: center;">
-                      ${Icons.shield(16, '#ffffff')}
-                    </div>
-                    <div>
-                      <div style="font-size: 13px; font-weight: 600; color: #ffffff;">Perpetual Commercial License</div>
-                      <div style="font-size: 11px; color: rgba(255,255,255,0.6);">Use across unlimited client projects</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);">
-                <a href="#/pricing" style="display: block; text-align: center; background: #ffffff; color: #121212; padding: 10px; border-radius: 32px; font-size: 13px; font-weight: 600; text-decoration: none;">
-                  Get All Sections ($99)
-                </a>
-              </div>
-            </div>
-
-            <!-- Col 2: Feature Card 1 -->
-            ${renderProductCard(featuredSections[0])}
-
-            <!-- Col 3: Feature Card 2 -->
-            ${renderProductCard(featuredSections[1])}
+          <!-- Minimal 3-Card Showcase Grid -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; align-items: stretch;">
+            ${showcaseSections.map(sec => renderProductCard(sec)).join('')}
           </div>
 
-          <!-- Second Row of Feature Cards -->
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-top: 16px;">
-            ${featuredSections.slice(2, 5).map(sec => renderProductCard(sec)).join('')}
+          <!-- Minimal Footer Bar -->
+          <div style="margin-top: 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; padding-top: 18px; border-top: 1px solid #f2f0ed;">
+            <div style="font-size: 13px; color: #7e7e7d; display: flex; align-items: center; gap: 8px;">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: #00ca48;"></span>
+              <span>16+ production sections • Ready for React 19 &amp; Tailwind CSS v4</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <a href="#/mixer" class="btn-sand-pill" style="font-size: 12px; padding: 6px 16px;">
+                Open Page Mixer
+              </a>
+              <a href="#/sections" class="btn-dark-pill" style="font-size: 12px; padding: 6px 18px;">
+                Explore All Sections
+              </a>
+            </div>
           </div>
         </div>
       </section>

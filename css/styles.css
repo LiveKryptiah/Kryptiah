@@ -321,24 +321,77 @@ h1, h2, h3, h4, h5, h6 {
   transform-origin: top left;
   width: 147%;
   pointer-events: none;
+  user-select: none;
 }
 
 .preview-hover-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(18, 18, 18, 0.65);
-  color: #ffffff;
+  background: rgba(18, 18, 18, 0.35);
+  backdrop-filter: blur(2px);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
-  font-weight: 500;
   opacity: 0;
-  transition: opacity 0.15s ease;
+  transition: opacity 0.2s ease;
+  z-index: 2;
 }
 
 .card-preview-window:hover .preview-hover-overlay {
   opacity: 1;
+}
+
+/* Minimal Section Card */
+.section-card {
+  padding: 14px;
+  border-radius: 12px;
+  background-color: var(--surface-pure-white, #ffffff);
+  box-shadow: inset 0 0 0 1px var(--color-stone-surface, #f2f0ed);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.section-card:hover {
+  transform: translateY(-2px);
+  box-shadow: inset 0 0 0 1px var(--color-stone-border, #e5d5c3), 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.card-fav-floating {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 3;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.card-fav-floating:hover {
+  transform: scale(1.08);
+  background: #ffffff;
+}
+
+.preview-pill-action {
+  background: var(--color-ink-black, #121212);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* --- Hero Spread & Mascot Flanks --- */
