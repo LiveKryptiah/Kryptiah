@@ -40,8 +40,8 @@ export function renderPricingView() {
             </div>
 
             <ul style="list-style: none; padding: 0; margin: 0 0 28px 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: #474645;">
-              <li style="display: flex; align-items: center; gap: 8px;">${Icons.check(13, '#00ca48')} Full React 19 JSX component code</li>
-              <li style="display: flex; align-items: center; gap: 8px;">${Icons.check(13, '#00ca48')} Tailwind CSS v4 utility classes</li>
+              <li style="display: flex; align-items: center; gap: 8px;">${Icons.check(13, '#00ca48')} design.md specification &amp; tokens</li>
+              <li style="display: flex; align-items: center; gap: 8px;">${Icons.check(13, '#00ca48')} AI Agent prompt guides &amp; directives</li>
               <li style="display: flex; align-items: center; gap: 8px;">${Icons.check(13, '#00ca48')} Mobile, tablet &amp; desktop tested</li>
               <li style="display: flex; align-items: center; gap: 8px;">${Icons.check(13, '#00ca48')} Perpetual commercial license</li>
               <li style="display: flex; align-items: center; gap: 8px; color: #a1a1aa;">${Icons.close(13, '#a1a1aa')} Access to other sections</li>

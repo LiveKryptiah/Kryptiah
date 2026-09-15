@@ -138,10 +138,10 @@ export function renderMixerSectionView() {
                         </span>
                         <button 
                           type="button" 
-                          onclick="window.azarelOpenPreview('${sec.id}', 'code')" 
-                          style="font-size: 11px; color: #ff3e00; text-decoration: underline; background: none; border: none; cursor: pointer;"
+                          onclick="window.azarelOpenPreview('${sec.id}', 'design')" 
+                          style="font-size: 11px; color: #08090a; font-weight: 510; text-decoration: underline; background: none; border: none; cursor: pointer;"
                         >
-                          View Code
+                          design.md Spec
                         </button>
                         <button 
                           type="button" 

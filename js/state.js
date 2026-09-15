@@ -26,10 +26,13 @@ class AppState {
     // Page Stack Mixer (default 3 sections)
     this.mixerStack = ['sec-hero-01', 'sec-bento-01', 'sec-social-01', 'sec-cta-01'];
 
-    // Active Section Preview Modal
+    // Active Section Preview Modal & Design Spec
     this.previewSection = null;
     this.previewDevice = 'desktop'; // 'desktop' | 'tablet' | 'mobile'
-    this.activeCodeTab = 'react'; // 'react' | 'tailwind' | 'html'
+    this.activeSpecTab = 'directives'; // 'directives' | 'tokens' | 'typography' | 'prompt' | 'raw'
+    this.modalViewMode = 'split'; // 'split' | 'spec' | 'preview'
+    this.cardModes = {}; // sectionId -> 'preview' | 'design'
+    this.showcaseMode = 'preview'; // 'preview' | 'design'
 
     // Checkout Modal
     this.isCheckoutOpen = false;
@@ -147,14 +150,17 @@ class AppState {
     this.notify();
   }
 
-  // --- Preview Modal Actions ---
-  openPreview(sectionId, initialTab = 'preview') {
+  // --- Preview Modal & Design Spec Actions ---
+  openPreview(sectionId, initialTab = 'preview', initialSpecTab = 'directives') {
     const sec = SECTIONS_DATA.find(s => s.id === sectionId || s.slug === sectionId);
     if (sec) {
       this.previewSection = sec;
-      if (initialTab === 'code') {
-        this.activeCodeTab = 'react';
+      if (initialTab === 'design' || initialTab === 'spec') {
+        this.modalViewMode = 'spec';
+      } else {
+        this.modalViewMode = 'split';
       }
+      this.activeSpecTab = initialSpecTab;
       this.notify();
     }
   }
@@ -169,8 +175,38 @@ class AppState {
     this.notify();
   }
 
-  setActiveCodeTab(tab) {
-    this.activeCodeTab = tab;
+  setActiveSpecTab(tab) {
+    this.activeSpecTab = tab;
+    this.notify();
+  }
+
+  setModalViewMode(mode) {
+    this.modalViewMode = mode;
+    this.notify();
+  }
+
+  // --- Per-Card & Showcase View Modes ---
+  getCardMode(sectionId) {
+    return this.cardModes[sectionId] || this.showcaseMode || 'preview';
+  }
+
+  setCardMode(sectionId, mode) {
+    this.cardModes[sectionId] = mode;
+    this.notify();
+  }
+
+  toggleCardMode(sectionId) {
+    const current = this.getCardMode(sectionId);
+    this.cardModes[sectionId] = current === 'preview' ? 'design' : 'preview';
+    this.notify();
+  }
+
+  setShowcaseMode(mode) {
+    this.showcaseMode = mode;
+    // apply to all cards
+    SECTIONS_DATA.forEach(s => {
+      this.cardModes[s.id] = mode;
+    });
     this.notify();
   }
 

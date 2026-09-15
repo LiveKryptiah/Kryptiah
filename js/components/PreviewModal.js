@@ -1,32 +1,30 @@
 /**
- * PreviewModal Component — Family Style Reference
- * Fullscreen Interactive Section Previewer:
- * - Device Switcher: Desktop (1200px), Tablet (768px), Mobile (375px)
- * - Multi-Framework Code Copier: React 19 JSX, Tailwind v4, HTML/CSS
+ * PreviewModal Component — Linear Style Reference (design.md)
+ * Fullscreen Interactive Section & Specification Inspector:
+ * - View Mode Switcher: [ Preview | design.md Spec | Split ]
+ * - Responsive Device Switcher: Desktop (1200px), Tablet (768px), Mobile (375px)
+ * - Pure Design System Specification Viewer (Zero Code Blocks)
  * - Direct Add to Cart & Stack Mixer triggers
  */
 
 import { state } from '../state.js';
 import { Icons } from './Icons.js';
+import { renderSpecInspector } from './SpecInspector.js';
 
 export function renderPreviewModal() {
   const section = state.previewSection;
   if (!section) return '';
 
   const activeDevice = state.previewDevice;
-  const activeTab = state.activeCodeTab;
+  const viewMode = state.modalViewMode || 'split';
   const inMixer = state.mixerStack.includes(section.id);
-
-  let currentCode = section.codeReact;
-  if (activeTab === 'tailwind') currentCode = section.codeTailwind;
-  if (activeTab === 'html') currentCode = section.codeHtml;
 
   return `
     <div class="modal-backdrop" onclick="window.azarelCloseModal(event)">
       <div class="modal-container" onclick="event.stopPropagation()">
         <!-- Modal Top Navigation Bar -->
         <div class="modal-header">
-          <!-- Left: Section Title & Archetype -->
+          <!-- Left: Section Title & Spec Archetype -->
           <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
             <div style="display: flex; flex-direction: column;">
               <div style="display: flex; align-items: center; gap: 8px;">
@@ -35,42 +33,79 @@ export function renderPreviewModal() {
                   ${section.isFree ? 'Freebie' : `$${section.price}`}
                 </span>
               </div>
-              <span style="font-size: 12px; color: #7e7e7d;">${section.categoryLabel} • ${section.framework}</span>
+              <div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #7e7e7d; margin-top: 2px;">
+                <span>${section.categoryLabel}</span>
+                <span>•</span>
+                <span style="color: #08090a; font-weight: 500;">design.md Standard</span>
+              </div>
             </div>
           </div>
 
-          <!-- Center: Device Switcher (Desktop, Tablet, Mobile) -->
-          <div class="device-switcher">
-            <button 
-              type="button" 
-              onclick="window.azarelSetDevice('desktop')" 
-              class="device-btn ${activeDevice === 'desktop' ? 'active' : ''}" 
-              title="Desktop View (1200px)"
-              style="display: inline-flex; align-items: center; gap: 6px;"
-            >
-              ${Icons.desktop(14)}
-              <span>Desktop</span>
-            </button>
-            <button 
-              type="button" 
-              onclick="window.azarelSetDevice('tablet')" 
-              class="device-btn ${activeDevice === 'tablet' ? 'active' : ''}" 
-              title="Tablet View (768px)"
-              style="display: inline-flex; align-items: center; gap: 6px;"
-            >
-              ${Icons.tablet(14)}
-              <span>Tablet</span>
-            </button>
-            <button 
-              type="button" 
-              onclick="window.azarelSetDevice('mobile')" 
-              class="device-btn ${activeDevice === 'mobile' ? 'active' : ''}" 
-              title="Mobile View (375px)"
-              style="display: inline-flex; align-items: center; gap: 6px;"
-            >
-              ${Icons.mobile(14)}
-              <span>Mobile</span>
-            </button>
+          <!-- Center: View Mode & Device Switcher -->
+          <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center;">
+            <!-- Primary Mode Switcher: Preview vs design.md vs Split -->
+            <div style="display: inline-flex; background: #f2f0ed; padding: 3px; border-radius: 9999px; gap: 2px;">
+              <button 
+                type="button" 
+                onclick="window.azarelSetModalViewMode('preview')" 
+                class="mode-pill-btn ${viewMode === 'preview' ? 'active' : ''}"
+                title="Interactive Visual Viewport"
+              >
+                Preview
+              </button>
+              <button 
+                type="button" 
+                onclick="window.azarelSetModalViewMode('spec')" 
+                class="mode-pill-btn ${viewMode === 'spec' ? 'active' : ''}"
+                title="design.md Specification"
+              >
+                design.md
+              </button>
+              <button 
+                type="button" 
+                onclick="window.azarelSetModalViewMode('split')" 
+                class="mode-pill-btn ${viewMode === 'split' ? 'active' : ''}"
+                title="Split View (Preview + Spec)"
+              >
+                Split
+              </button>
+            </div>
+
+            <!-- Device Switcher (Visible when viewport is active) -->
+            ${viewMode !== 'spec' ? `
+              <div class="device-switcher">
+                <button 
+                  type="button" 
+                  onclick="window.azarelSetDevice('desktop')" 
+                  class="device-btn ${activeDevice === 'desktop' ? 'active' : ''}" 
+                  title="Desktop View (1200px)"
+                  style="display: inline-flex; align-items: center; gap: 6px;"
+                >
+                  ${Icons.desktop(14)}
+                  <span>Desktop</span>
+                </button>
+                <button 
+                  type="button" 
+                  onclick="window.azarelSetDevice('tablet')" 
+                  class="device-btn ${activeDevice === 'tablet' ? 'active' : ''}" 
+                  title="Tablet View (768px)"
+                  style="display: inline-flex; align-items: center; gap: 6px;"
+                >
+                  ${Icons.tablet(14)}
+                  <span>Tablet</span>
+                </button>
+                <button 
+                  type="button" 
+                  onclick="window.azarelSetDevice('mobile')" 
+                  class="device-btn ${activeDevice === 'mobile' ? 'active' : ''}" 
+                  title="Mobile View (375px)"
+                  style="display: inline-flex; align-items: center; gap: 6px;"
+                >
+                  ${Icons.mobile(14)}
+                  <span>Mobile</span>
+                </button>
+              </div>
+            ` : ''}
           </div>
 
           <!-- Right: Actions & Close -->
@@ -105,91 +140,29 @@ export function renderPreviewModal() {
           </div>
         </div>
 
-        <!-- Modal Body: Split into Interactive Viewport and Code Copier -->
+        <!-- Modal Body: Interactive Viewport and/or design.md Spec -->
         <div class="modal-body-scroll">
-          <!-- Device Viewport Container -->
-          <div class="viewport-canvas-wrapper">
-            <div class="viewport-frame viewport-${activeDevice}">
-              <div class="viewport-content">
-                ${section.previewHtml}
+          <!-- 1. Viewport Canvas (Shown in preview and split modes) -->
+          ${viewMode !== 'spec' ? `
+            <div class="viewport-canvas-wrapper" style="${viewMode === 'preview' ? 'min-height: 520px;' : ''}">
+              <div class="viewport-frame viewport-${activeDevice}">
+                <div class="viewport-content">
+                  ${section.previewHtml}
+                </div>
               </div>
             </div>
-          </div>
+          ` : ''}
 
-          <!-- Code Inspector & Asset Details Section -->
-          <div class="code-inspector-card">
-            <!-- Tabs -->
-            <div class="code-tabs-header">
-              <div style="display: flex; gap: 8px;">
-                <button 
-                  type="button" 
-                  onclick="window.azarelSetCodeTab('react')" 
-                  class="code-tab ${activeTab === 'react' ? 'active' : ''}"
-                  style="display: inline-flex; align-items: center; gap: 6px;"
-                >
-                  ${Icons.react(14, activeTab === 'react' ? '#0086fc' : '#7e7e7d')}
-                  <span>React 19 JSX</span>
-                </button>
-                <button 
-                  type="button" 
-                  onclick="window.azarelSetCodeTab('tailwind')" 
-                  class="code-tab ${activeTab === 'tailwind' ? 'active' : ''}"
-                  style="display: inline-flex; align-items: center; gap: 6px;"
-                >
-                  ${Icons.tailwind(14, activeTab === 'tailwind' ? '#00b2ff' : '#7e7e7d')}
-                  <span>Tailwind CSS v4</span>
-                </button>
-                <button 
-                  type="button" 
-                  onclick="window.azarelSetCodeTab('html')" 
-                  class="code-tab ${activeTab === 'html' ? 'active' : ''}"
-                  style="display: inline-flex; align-items: center; gap: 6px;"
-                >
-                  ${Icons.code(14, activeTab === 'html' ? '#121212' : '#7e7e7d')}
-                  <span>Vanilla HTML &amp; CSS</span>
-                </button>
-              </div>
-
-              <!-- Copy Code Button -->
-              <button 
-                type="button" 
-                onclick="window.azarelCopyCode('${section.id}')" 
-                class="btn-sand-pill" 
-                style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; font-size: 12px;"
-              >
-                ${Icons.copy(14, '#343433')}
-                <span>Copy Code Snippet</span>
-              </button>
+          <!-- 2. design.md Specification Inspector (Zero Code Blocks) -->
+          ${viewMode !== 'preview' ? `
+            <div style="${viewMode === 'spec' ? 'max-width: 1100px; margin: 0 auto;' : 'margin-top: 20px;'}">
+              ${renderSpecInspector(section, state.activeSpecTab)}
             </div>
-
-            <!-- Code Snippet Area -->
-            <pre class="code-snippet-box"><code>${escapeHtml(currentCode)}</code></pre>
-
-            <!-- Metadata Features -->
-            <div style="margin-top: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; font-size: 13px;">
-              <div style="background: #ffffff; padding: 12px; border-radius: 8px; box-shadow: inset 0 0 0 1px #f2f0ed;">
-                <div style="font-weight: 600; color: #121212; margin-bottom: 4px;">Included with License:</div>
-                <div style="color: #474645;">${section.included.join(' • ')}</div>
-              </div>
-              <div style="background: #ffffff; padding: 12px; border-radius: 8px; box-shadow: inset 0 0 0 1px #f2f0ed;">
-                <div style="font-weight: 600; color: #121212; margin-bottom: 4px;">Design Standard:</div>
-                <div style="color: #474645;">Family Design Tokens • Inter Font • Hairline Borders</div>
-              </div>
-            </div>
-          </div>
+          ` : ''}
         </div>
       </div>
     </div>
   `;
-}
-
-function escapeHtml(text = '') {
-  return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
 }
 
 // Global Handlers
@@ -199,17 +172,4 @@ window.azarelCloseModal = (e) => {
   }
 };
 window.azarelSetDevice = (device) => state.setPreviewDevice(device);
-window.azarelSetCodeTab = (tab) => state.setActiveCodeTab(tab);
-window.azarelCopyCode = (id) => {
-  const section = state.previewSection;
-  if (!section) return;
-  let code = section.codeReact;
-  if (state.activeCodeTab === 'tailwind') code = section.codeTailwind;
-  if (state.activeCodeTab === 'html') code = section.codeHtml;
-
-  navigator.clipboard.writeText(code).then(() => {
-    state.notifyToast(`Copied ${state.activeCodeTab.toUpperCase()} code to clipboard!`);
-  }).catch(() => {
-    state.notifyToast('Copied to clipboard');
-  });
-};
+window.azarelSetModalViewMode = (mode) => state.setModalViewMode(mode);

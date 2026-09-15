@@ -1,22 +1,18 @@
 /**
- * ProductDetailView Component — Family Style Reference
- * In-depth section viewer with responsive viewport simulator, code tabs, and license checkout.
- * Clean SVG icons (zero emojis).
+ * ProductDetailView Component — Linear Style Reference (design.md)
+ * In-depth section viewer with responsive viewport simulator, design.md specification,
+ * tokens, typography ladder, and agent prompts. Zero code blocks.
  */
 
 import { SECTIONS_DATA } from '../data/products.js';
 import { state } from '../state.js';
 import { Icons } from '../components/Icons.js';
+import { renderSpecInspector } from '../components/SpecInspector.js';
 
 export function renderProductDetailView(slug) {
   const section = SECTIONS_DATA.find(s => s.slug === slug || s.id === slug) || SECTIONS_DATA[0];
   const activeDevice = state.previewDevice;
-  const activeTab = state.activeCodeTab;
   const inMixer = state.mixerStack.includes(section.id);
-
-  let currentCode = section.codeReact;
-  if (activeTab === 'tailwind') currentCode = section.codeTailwind;
-  if (activeTab === 'html') currentCode = section.codeHtml;
 
   return `
     <div class="product-detail-page" style="padding: 40px 0 80px 0; min-height: calc(100vh - 64px);">
@@ -108,62 +104,19 @@ export function renderProductDetailView(slug) {
           </div>
         </div>
 
-        <!-- Code Snippet Copier & Specs -->
-        <div class="code-inspector-card">
-          <div class="code-tabs-header">
-            <div style="display: flex; gap: 8px;">
-              <button 
-                type="button" 
-                onclick="window.azarelSetCodeTab('react')" 
-                class="code-tab ${activeTab === 'react' ? 'active' : ''}"
-                style="display: inline-flex; align-items: center; gap: 6px;"
-              >
-                ${Icons.react(14, activeTab === 'react' ? '#0086fc' : '#7e7e7d')}
-                <span>React 19 JSX</span>
-              </button>
-              <button 
-                type="button" 
-                onclick="window.azarelSetCodeTab('tailwind')" 
-                class="code-tab ${activeTab === 'tailwind' ? 'active' : ''}"
-                style="display: inline-flex; align-items: center; gap: 6px;"
-              >
-                ${Icons.tailwind(14, activeTab === 'tailwind' ? '#00b2ff' : '#7e7e7d')}
-                <span>Tailwind CSS v4</span>
-              </button>
-              <button 
-                type="button" 
-                onclick="window.azarelSetCodeTab('html')" 
-                class="code-tab ${activeTab === 'html' ? 'active' : ''}"
-                style="display: inline-flex; align-items: center; gap: 6px;"
-              >
-                ${Icons.code(14, activeTab === 'html' ? '#121212' : '#7e7e7d')}
-                <span>Vanilla HTML/CSS</span>
-              </button>
-            </div>
-
-            <button 
-              type="button" 
-              onclick="navigator.clipboard.writeText(document.getElementById('detail-code-box').innerText); window.dispatchEvent(new CustomEvent('azarel:toast', { detail: { message: 'Code copied to clipboard!' } }))" 
-              class="btn-sand-pill"
-              style="padding: 6px 14px; font-size: 13px; display: inline-flex; align-items: center; gap: 6px;"
-            >
-              ${Icons.copy(14, '#343433')}
-              <span>Copy Code</span>
-            </button>
+        <!-- Design Specification & Tokens (Zero Code Blocks) -->
+        <div>
+          <div style="margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #7e7e7d;">
+              DESIGN.MD SPECIFICATION &amp; TOKENS
+            </span>
+            <span style="font-size: 12px; color: #8a8f98; font-family: ui-monospace, monospace;">
+              Linear Design System Standard
+            </span>
           </div>
-
-          <pre class="code-snippet-box"><code id="detail-code-box">${escapeHtml(currentCode)}</code></pre>
+          ${renderSpecInspector(section, state.activeSpecTab, true)}
         </div>
       </div>
     </div>
   `;
-}
-
-function escapeHtml(text = '') {
-  return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
 }

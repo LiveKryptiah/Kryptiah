@@ -590,50 +590,159 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 32px;
 }
 
-/* Code Inspector */
-.code-inspector-card {
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: inset 0 0 0 1px var(--color-stone-surface, #f2f0ed);
-  padding: 20px;
+/* --- Design System Specification Inspector (design.md — Zero Code Blocks) --- */
+.spec-inspector-card {
+  background: #0f1011;
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 1px #23252a;
+  padding: 24px;
+  color: #d0d6e0;
 }
 
-.code-tabs-header {
+.spec-tabs-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 14px;
-  border-bottom: 1px solid var(--color-stone-surface, #f2f0ed);
-  padding-bottom: 10px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid #23252a;
+  padding-bottom: 12px;
   flex-wrap: wrap;
   gap: 10px;
 }
 
-.code-tab {
+.spec-tab {
   padding: 6px 12px;
   font-size: 13px;
-  font-weight: 500;
-  color: var(--color-muted-gray, #7e7e7d);
+  font-weight: 400;
+  color: #8a8f98;
   border-radius: 6px;
   cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  transition: all 0.15s ease;
 }
 
-.code-tab.active {
-  color: var(--color-ink-black, #121212);
-  background: var(--surface-sand, #f6f4ef);
+.spec-tab:hover {
+  color: #ffffff;
+}
+
+.spec-tab.active {
+  color: #ffffff;
+  background: #161718;
+  border-color: #23252a;
+  font-weight: 510;
+}
+
+.btn-acid-lime {
+  background-color: #e4f222;
+  color: #08090a;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 510;
+  letter-spacing: -0.011em;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+}
+
+.btn-acid-lime:hover {
+  opacity: 0.92;
+}
+
+.btn-acid-lime:active {
+  transform: scale(0.98);
+}
+
+/* Card Mode Toggle */
+.card-mode-toggle {
+  display: inline-flex;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 9999px;
+  padding: 2px;
+  gap: 2px;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 3;
+}
+
+.mode-btn {
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 9999px;
+  border: none;
+  background: transparent;
+  color: #7e7e7d;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.mode-btn.active {
+  background: #121212;
+  color: #ffffff;
   font-weight: 600;
 }
 
-.code-snippet-box {
-  background: #121212;
-  color: #fbfaf9;
-  padding: 16px;
-  border-radius: 8px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+.mode-pill-btn {
+  padding: 5px 14px;
+  border-radius: 9999px;
   font-size: 12px;
-  line-height: 1.6;
-  max-height: 320px;
-  overflow: auto;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: #7e7e7d;
+  transition: all 0.15s ease;
+}
+
+.mode-pill-btn.active {
+  background: #121212;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Minimal design.md Card Frame */
+.design-spec-frame {
+  width: 100%;
+  height: 180px;
+  background-color: #08090a;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 0 0 1px #23252a;
+  cursor: pointer;
+  padding: 14px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  transition: box-shadow 0.2s ease;
+}
+
+.design-spec-frame:hover {
+  box-shadow: inset 0 0 0 1px #383b3f;
+}
+
+.token-swatch-strip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.token-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: inline-block;
 }
 
 /* --- Cart Slide-Over & Checkout --- */

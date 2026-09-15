@@ -16,19 +16,32 @@ import { Icons } from './Icons.js';
 export function renderProductCard(section) {
   const isFavorited = state.isFavorited(section.id);
   const inMixer = state.mixerStack.includes(section.id);
+  const cardMode = state.getCardMode(section.id);
 
   return `
     <div class="section-card" id="card-${section.id}">
-      <!-- 1. Preview Frame (Visual First) -->
-      <div 
-        class="card-preview-window" 
-        onclick="window.azarelOpenPreview('${section.id}', 'preview')" 
-        title="Click to launch interactive device preview"
-      >
-        <div class="preview-mini-scale">
-          ${section.previewHtml}
+      <!-- 1. Interactive Frame Header with Mode Switcher -->
+      <div style="position: relative;">
+        <!-- Card Mode Switcher (Click to change into design.md or preview) -->
+        <div class="card-mode-toggle" onclick="event.stopPropagation()">
+          <button 
+            type="button" 
+            class="mode-btn ${cardMode === 'preview' ? 'active' : ''}" 
+            onclick="window.azarelSetCardMode('${section.id}', 'preview')"
+            title="Live Visual Preview"
+          >
+            Preview
+          </button>
+          <button 
+            type="button" 
+            class="mode-btn ${cardMode === 'design' ? 'active' : ''}" 
+            onclick="window.azarelSetCardMode('${section.id}', 'design')"
+            title="design.md Specification"
+          >
+            design.md
+          </button>
         </div>
-        
+
         <!-- Floating Favorite Button -->
         <button 
           type="button" 
@@ -40,17 +53,68 @@ export function renderProductCard(section) {
           ${Icons.heart(14, isFavorited, isFavorited ? '#ff3e00' : '#7e7e7d')}
         </button>
 
-        <!-- Minimal Centered Hover Action -->
-        <div class="preview-hover-overlay">
-          <span class="preview-pill-action">
-            ${Icons.search(13, '#ffffff')}
-            <span>Preview &amp; Code</span>
-          </span>
-        </div>
+        ${cardMode === 'design' ? `
+          <!-- DESIGN.MD SPECIFICATION FRAME (Zero Code) -->
+          <div 
+            class="design-spec-frame" 
+            onclick="window.azarelOpenPreview('${section.id}', 'design')" 
+            title="Click to open full design.md specification"
+          >
+            <div style="padding-top: 24px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span style="display: inline-flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 700; color: #e4f222; text-transform: uppercase; letter-spacing: 0.06em; font-family: ui-monospace, monospace;">
+                  <span style="width: 6px; height: 6px; border-radius: 50%; background: #e4f222;"></span>
+                  DESIGN.MD SPEC
+                </span>
+                <span style="font-size: 11px; color: #8a8f98; font-family: ui-monospace, monospace;">Level 1 Carbon</span>
+              </div>
+
+              <div class="token-swatch-strip" style="margin-bottom: 10px;">
+                <span class="token-dot" style="background: #08090a;" title="Void #08090a"></span>
+                <span class="token-dot" style="background: #0f1011;" title="Carbon #0f1011"></span>
+                <span class="token-dot" style="background: #23252a;" title="Graphite #23252a"></span>
+                <span class="token-dot" style="background: #d0d6e0;" title="Mist #d0d6e0"></span>
+                <span class="token-dot" style="background: #e4f222;" title="Acid Lime #e4f222"></span>
+                <span style="font-size: 11px; color: #8a8f98; margin-left: 4px;">Palette</span>
+              </div>
+
+              <div style="font-size: 12px; color: #d0d6e0; line-height: 1.45;">
+                <div style="color: #ffffff; font-weight: 500;">Inter Variable · Berkeley Mono</div>
+                <div style="color: #8a8f98; font-size: 11px;">12px Card · 6px Button · 0.5px Hairline</div>
+              </div>
+            </div>
+
+            <div style="padding-top: 8px; border-top: 1px solid #23252a; display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 11px; color: #e4f222; font-weight: 510; display: inline-flex; align-items: center; gap: 4px;">
+                Inspect design.md spec →
+              </span>
+              <span style="font-size: 10px; color: #62666d; font-family: ui-monospace, monospace;">NO CODE</span>
+            </div>
+          </div>
+        ` : `
+          <!-- LIVE VISUAL PREVIEW FRAME -->
+          <div 
+            class="card-preview-window" 
+            onclick="window.azarelOpenPreview('${section.id}', 'preview')" 
+            title="Click to launch interactive device preview"
+          >
+            <div class="preview-mini-scale">
+              ${section.previewHtml}
+            </div>
+
+            <!-- Minimal Centered Hover Action -->
+            <div class="preview-hover-overlay">
+              <span class="preview-pill-action">
+                ${Icons.search(13, '#ffffff')}
+                <span>Preview Viewport</span>
+              </span>
+            </div>
+          </div>
+        `}
       </div>
 
       <!-- 2. Minimal Card Meta & Title -->
-      <div style="padding: 14px 4px 4px 4px; display: flex; flex-direction: column; flex: 1; justify-content: space-between;">
+      <div style="padding: 12px 4px 4px 4px; display: flex; flex-direction: column; flex: 1; justify-content: space-between;">
         <div>
           <!-- Category & Price Row -->
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
@@ -63,7 +127,7 @@ export function renderProductCard(section) {
           </div>
 
           <!-- Section Title -->
-          <h3 style="font-size: 16px; font-weight: 600; color: #121212; line-height: 1.35; margin: 0 0 12px 0;">
+          <h3 style="font-size: 16px; font-weight: 600; color: #121212; line-height: 1.35; margin: 0 0 10px 0;">
             <a href="#/section/${section.slug}" style="text-decoration: none; color: inherit;">
               ${section.name}
             </a>
@@ -74,11 +138,11 @@ export function renderProductCard(section) {
         <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 10px; border-top: 1px solid #f2f0ed; margin-top: auto;">
           <button 
             type="button" 
-            onclick="window.azarelOpenPreview('${section.id}', 'preview')" 
+            onclick="window.azarelOpenPreview('${section.id}', '${cardMode === 'design' ? 'design' : 'preview'}')" 
             class="link-demo"
-            style="font-size: 13px;"
+            style="font-size: 13px; color: ${cardMode === 'design' ? '#08090a' : '#ff3e00'}; font-weight: ${cardMode === 'design' ? '600' : '500'};"
           >
-            Watch demo
+            ${cardMode === 'design' ? 'View design.md spec →' : 'Watch demo'}
           </button>
 
           <div style="display: flex; align-items: center; gap: 6px;">
@@ -123,3 +187,5 @@ window.azarelAddToCart = (id) => {
   }
 };
 window.azarelOpenPreview = (id, tab = 'preview') => state.openPreview(id, tab);
+window.azarelSetCardMode = (id, mode) => state.setCardMode(id, mode);
+window.azarelToggleCardMode = (id) => state.toggleCardMode(id);
